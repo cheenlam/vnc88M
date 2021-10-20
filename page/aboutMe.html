@@ -1,1 +1,32 @@
-aboutMe
+<div id="page">
+    <div class="aboutMe" ref="aboutMe" :style="{minHeight:boxH}">
+        <div class="title">關於我們</div>
+        <div class="fullBanner">
+            <img src="images/carousel/aboutMe.jpg">
+        </div>
+        <div class="txt">來自一群充滿熱情及對體育賽事懷抱著夢想的年輕人所組的優質團隊，秉持『歡樂、熱情、創新、多元化』的信念為玩家打造隨手可得的資訊平台，也將歡樂又刺激的氛圍及親切服務的精神靈魂活化到vnc88資訊平台上。除了讓玩家能享有舒適的休閒空間外，也需讓玩家感受到便利，開心享受、喜愛體育賽事，無時無刻都可以關注到足球賽事的最新資訊，尋找到精彩賽事的歡樂。</div>
+    </div>
+</div>
+
+
+<script>
+
+Vue.createApp({
+        data() {
+            return {
+                boxH:'',
+            };
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.boxH = `${cntH}px`;
+            },
+            
+        },
+        mounted() {
+            this.setH();
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

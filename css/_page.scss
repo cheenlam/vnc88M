@@ -705,3 +705,27 @@
         }
     }
 }
+
+
+// ==== aboutMe start (關於我們) ====
+.aboutMe{
+    padding: 20px;
+    min-height: 100%;
+    color: #fff;
+    background: linear-gradient(180deg, #021020, #0b2d52 150px);
+    .title{
+        padding-bottom: 20px;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        font-weight: bold;   
+        text-align: center;    
+    }
+    .fullBanner{
+        box-shadow: 0px 0px 4px #000;
+    }
+    .txt{
+        padding: 20px 0;
+        line-height: 1.8rem;
+      
+    }
+}
