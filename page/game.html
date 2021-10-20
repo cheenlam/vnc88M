@@ -1,6 +1,6 @@
 <div id="page">
     <!-- ==== gameBox start (遊戲) ==== -->
-    <div class="gameBox" ref="gameBox" :style="{minHeight:boxH}" >
+    <div class="gameBox" ref="gameBox">
         <!-- gameTitle start-->
         <div class="gameTitle">
             <img src="images/game/title.png">
@@ -50,7 +50,6 @@
         data() {
             return {
                 gameList:gameList,
-                boxH:'',
 
                 // ==== 會員基本資料 ====
                 mbrMsg: {
@@ -63,7 +62,7 @@
         methods: {
             setH() {
                 let cntH = indexVue.$refs.content.clientHeight;
-                this.boxH = `${cntH}px`;
+                this.$refs.gameBox.style.minHeight = `${cntH}px`
             },
             setSignin() {
                 let hdH = indexVue.$refs.header.offsetHeight;

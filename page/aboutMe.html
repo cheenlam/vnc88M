@@ -1,5 +1,5 @@
 <div id="page">
-    <div class="aboutMe" ref="aboutMe" :style="{minHeight:boxH}">
+    <div class="aboutMe" ref="aboutMe">
         <div class="title">關於我們</div>
         <div class="fullBanner">
             <img src="images/carousel/aboutMe.jpg">
@@ -14,15 +14,13 @@
 Vue.createApp({
         data() {
             return {
-                boxH:'',
             };
         },
         methods: {
             setH() {
                 let cntH = indexVue.$refs.content.clientHeight;
-                this.boxH = `${cntH}px`;
-            },
-            
+                this.$refs.aboutMe.style.minHeight = `${cntH}px`
+            },  
         },
         mounted() {
             this.setH();

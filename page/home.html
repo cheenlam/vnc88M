@@ -174,7 +174,6 @@
     </div>
 </div>
 
-
 <script>
     Vue.createApp({
         data() {
@@ -432,12 +431,9 @@
             },
 
             chNewList() {
-                this.newSwitch.latest = false;
-                this.newSwitch.home = false;
-                this.newSwitch.lottery = false;
-                this.newSwitch.news = false;
-                this.newSwitch.broadcast = false;
-                this.newSwitch.resource = false;
+                for (let i in this.newSwitch) {
+                    this.newSwitch[i] = false
+                }
 
                 switch (this.newsSel.now) {
                     case 'latest':

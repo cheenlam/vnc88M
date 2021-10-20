@@ -61,7 +61,7 @@
         <!-- ==== sideList start (側邊選單) ==== -->
         <div class="sideList" ref="sideList" :class="{'on':sideList}">
             <div class="close" @click="sideList = false"></div>
-            <div class="sideBody"  ref="sideBody">
+            <div class="sideBody" ref="sideBody">
                 <div class="badge">
                     <img src="images/levelBadge/level_01.png">
                 </div>
@@ -76,12 +76,12 @@
                             </div>
                         </li>
                     </ul>
-    
+
                     <div class="btn_linear_c5 btn">
                         <div class="btn_cnt">紀錄查詢</div>
                     </div>
                 </div>
-    
+
                 <div class="list" @click="sideList = false">
                     <ul>
                         <li><a href="#/aboutMe">關於我們</a></li>
@@ -89,7 +89,7 @@
                         <li><a>意見反饋</a></li>
                     </ul>
                 </div>
-    
+
                 <div class="btnBox" @click="sideList = false">
                     <div class="btn_linear_c3 btn" v-if="mbrLogin" @click="toSignOut()">
                         <div class="btn_cnt">登出</div>
@@ -388,7 +388,7 @@
                     this.setSide();
                 },
                 // ==== 側邊選單切換 ====
-                toggleSide(){
+                toggleSide() {
                     this.sideList = !this.sideList;
                     // sideBody卷軸至頂
                     this.$refs.sideBody.scrollTop = 0;
@@ -402,8 +402,8 @@
                         location.reload();
                     }, 200)
                 },
-                 // ==== 側邊選單登入 ====
-                toSignIn(){
+                // ==== 側邊選單登入 ====
+                toSignIn() {
                     this.dialog.main = true;
                     this.dialog.signIn = true;
                 },
@@ -499,34 +499,24 @@
 
                 // ==== 關閉彈窗 ====
                 closeDialog() {
-                    this.dialog.main = false;
-                    this.dialog.signIn = false;
-                    this.dialog.forget = false;
-                    this.dialog.regd = false;
-                    this.dialog.gift = false;
-                    this.dialog.todayGame = false;
-                    this.dialog.suggest = false;
-
+                    for (let i in this.dialog) {
+                        this.dialog[i] = false
+                    }
                     this.reset();
                 },
 
+                // ==== 清除所有error訊息 & 所有輸入====
                 reset() {
-                    // 清除所有error訊息
-                    this.errorCode.reEmail = false;
-                    this.errorCode.notEmail = false;
-                    this.errorCode.verify = false;
-                    this.errorCode.pwd = false;
-
-                    // 清除所有輸入
-                    this.regdMbr.account = '';
-                    this.regdMbr.pwd = '';
-                    this.regdMbr.phone = '';
-                    this.regdMbr.code = '';
-                    this.regdMbr.agree = false;
-
-                    this.signInMbr.account = '';
-                    this.signInMbr.pwd = '';
-                    this.signInMbr.code = '';
+                    let data = [this.errorCode, this.regdMbr, this.signInMbr];
+                    data.forEach(function(item) {
+                        for (let i in item) {
+                            if (item[i] == true) {
+                                item[i] = false
+                            } else if (item[i] != '') {
+                                item[i] = ''
+                            }
+                        }
+                    })
 
                     // this.suggest.msg = '';
                 },
