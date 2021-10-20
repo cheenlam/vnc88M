@@ -1,0 +1,243 @@
+<div id="page">
+    <!-- ==== forumBox start (討論區) ==== -->
+    <div class="forumBox" ref="forumBox">
+        <!-- obvious start -->
+        <div class="obvious">
+            <div class="arrow left" @click="chObvious('left')"></div>
+            <div class="obviousCnt" id="obviousCnt">
+                <ul ref="obvious">
+                    <template v-for="(item,index) in obvious.list">
+                        <li>
+                            <span>{{item.name}}</span>
+                            <p>{{item.txt}}</p>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+            <div class="arrow right" @click="chObvious('right')"></div>
+        </div>
+
+        <!-- search start -->
+        <div class="search">
+            <input type="text" placeholder="請輸入關鍵字">
+            <div class="icon"></div>
+        </div>
+
+        <!-- sortList start (分類) -->
+        <div class="sortList">
+            <!-- 賽事類型 -->
+            <div class="forumSort">
+                <div class="forumSel" @click="forumSort.match.switch = true">
+                    <span>{{forumSort.match.txt}}</span>
+                    <div class="icon"></div>
+                </div>
+                <div class="selList" :class="{'on':forumSort.match.switch}">
+                    <div class="listCnt">
+                        <div class="title">賽事類型</div>
+                        <div class="list">
+                            <ul>
+                                <template v-for="(item,index) in forumSort.match.list">
+                                <li @click="reMatch(index) ,forumSort.match.switch = false">
+                                    <label>
+                                        <span>{{item}}</span>
+                                        <input type="radio" 
+                                        name="match" 
+                                        v-model="forumSort.match.checked" 
+                                        :value="index">
+                                    </label> 
+                                </li>
+                            </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分類 -->
+            <div class="forumSort">
+                <div class="forumSel" @click="forumSort.sort.switch = true">
+                    <span>{{forumSort.sort.txt}}</span>
+                    <div class="icon"></div>
+                </div>
+                <div class="selList" :class="{'on':forumSort.sort.switch}">
+                    <div class="listCnt">
+                        <div class="title">分類</div>
+                        <div class="list">
+                            <ul>
+                                <template v-for="(item,index) in forumSort.sort.list">
+                                <li @click="reSort(index) ,forumSort.sort.switch = false">
+                                    <label>
+                                        <span>{{item}}</span>
+                                        <input type="radio" 
+                                        name="sort" 
+                                        v-model="forumSort.sort.checked" 
+                                        :value="index">
+                                    </label> 
+                                </li>
+                            </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 排序 -->
+            <div class="forumSort">
+                <div class="forumSel" @click="forumSort.array.switch = true">
+                    <span>{{forumSort.array.txt}}</span>
+                    <div class="icon"></div>
+                </div>
+                <div class="selList" :class="{'on':forumSort.array.switch}">
+                    <div class="listCnt">
+                        <div class="title">排序</div>
+                        <div class="list">
+                            <ul>
+                                <template v-for="(item,index) in forumSort.array.list">
+                                <li @click="reArray(index) ,forumSort.array.switch = false">
+                                    <label>
+                                        <span>{{item}}</span>
+                                        <input type="radio" 
+                                        name="array" 
+                                        v-model="forumSort.array.checked" 
+                                        :value="index">
+                                    </label> 
+                                </li>
+                            </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- forumTool start (功能按鈕) -->
+        <div class="forumTool">
+            <div class="btn_linear_c2 btn">
+                <button class="btn_cnt">版規</button>
+            </div>
+            <div class="btn_linear_c1 btn">
+                <button class="btn_cnt">發表文章</button>
+            </div>
+        </div>
+
+        <!-- forumList start -->
+        <div class="forumList">
+            <table>
+                <tr>
+                    <template v-for="(item,index) in forumList.main">
+                        <th>{{item}}</th>
+                    </template>
+                </tr>
+                <template v-for="(item,index) in forumList.list">
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="tag">{{item.tag}}</div>
+                                <p>{{item.title}}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="author">
+                                <div class="avatar">
+                                    <img :src="item.avatar">
+                                </div>
+                                <div class="msg">
+                                    <p class="name">{{item.name}}</p>
+                                    <p class="time">{{item.date}} {{item.time}}</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+
+        <!-- forumTool start -->
+        <div class="forumTool">
+            <div class="btn_linear_c4 btn">
+                <button class="btn_cnt">Back</button>
+            </div>
+            <div class="btn_linear_c4 btn">
+                <button class="btn_cnt">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                obvious: {
+                    count: 0,
+                    list: obviousList,
+                },
+
+                forumSort: {
+                    match: {
+                        switch: false,
+                        checked: 0,
+                        list: filterList.match,
+                        txt: '',
+                    },
+                    sort: {
+                        switch: false,
+                        checked: 0,
+                        list: filterList.sort,
+                        txt: '',
+                    },
+                    array: {
+                        switch: false,
+                        checked: 0,
+                        list: filterList.array,
+                        txt: '',
+                    }
+                },
+                forumList:forumList,
+            };
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.$refs.forumBox.style.minHeight = `${cntH}px`;
+            },
+            setObvious() {
+                let length = this.obvious.list.length;
+                this.$refs.obvious.style.width = `${length*100}%`;
+            },
+            chObvious(data) {
+                let length = this.obvious.list.length - 1;
+                let list = document.querySelectorAll('#obviousCnt li');
+                let self = this;
+                if (data == 'left') {
+                    this.obvious.count = this.obvious.count == 0 ? length : this.obvious.count - 1
+                } else if (data == 'right') {
+                    this.obvious.count = this.obvious.count == length ? 0 : this.obvious.count + 1
+                }
+
+                list.forEach(function(item) {
+                    item.style.transform = `translateX(-${self.obvious.count*100}%)`;
+                })
+            },
+            reMatch(data) {
+                this.forumSort.match.txt = this.forumSort.match.list[data];
+            },
+            reSort(data) {
+                this.forumSort.sort.txt = this.forumSort.sort.list[data];
+            },
+            reArray(data) {
+                this.forumSort.array.txt = this.forumSort.array.list[data];
+            },
+        },
+        mounted() {
+            this.setH();
+            this.setObvious();
+            this.reMatch(0);
+            this.reSort(0);
+            this.reArray(0);
+
+            let hdH = indexVue.$refs.header.offsetHeight;
+            document.querySelector('.obvious').style.top = `${hdH}px`
+        },
+    }).mount("#page");
+</script>

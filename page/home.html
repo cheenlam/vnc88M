@@ -1,0 +1,478 @@
+<div id="page">
+    <!-- ==== homeBox start (首頁) ==== -->
+    <div class="homeBox">
+        <!-- feature start (輪播) -->
+        <div class="feature">
+            <div id="full_feature" class="swipslider" v-show="!carousel.change">
+                <ul class="sw-slides">
+                    <template v-for="(item,index) in carousel.maxSize">
+                    <li class="sw-slide">
+                        <img :src="item.img" alt="Home carousel">
+                    </li>
+                </template>
+                </ul>
+            </div>
+            <div id="min_feature" class="swipslider min" v-show="carousel.change">
+                <ul class="sw-slides">
+                    <template v-for="(item,index) in carousel.minSize">
+                    <li class="sw-slide">
+                        <img :src="item.img" alt="Small screen homepage carousel.">
+                    </li>
+                </template>
+                </ul>
+            </div>
+        </div>
+
+        <!-- marquee start (跑馬燈) -->
+        <div class="marquee">
+            <div class="marqueeBox">
+                <div>
+                    <div class="title">
+                        <img src="images/icon/horn.png">
+                        <span>公告：</span>
+                    </div>
+
+                    <ul id="marquee" class="marquee_body">
+                        <template v-for="(item,index) in marquee">
+                        <li>{{item.txt}}</li>
+                    </template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- lottoryMsg start -->
+        <div class="lottoryMsg">
+            <ul>
+                <template v-for="(item,index) in lottory">
+                <li>
+                    <a :href="item.href">
+                        <div class="hot" v-if="item.hot"></div> 
+                        <div class="icon" :style="getbgi(item.img)"></div>  
+                        <span>{{item.title}}</span>
+                    </a>
+                </li>  
+            </template>
+            </ul>
+        </div>
+
+        <!-- newsSel start -->
+        <div class="newsSel">
+            <div class="selList" ref="selList">
+                <ul>
+                    <template v-for="(item,index) in newsSel.list">
+                    <li v-if="item.switch" :data-name="item.data" @click="chSel(item)">
+                        {{item.title}}
+                    </li>
+                </template>
+                </ul>
+            </div>
+            <div class="more" v-if="newsSel.more" @click="scrollR()"></div>
+        </div>
+
+        <!-- fullList start -->
+        <div class="fullList">
+            <ul>
+                <!-- 最新消息 -->
+                <template v-for="(item,index) in newsData.latest">
+                    <li v-if="newSwitch.latest">
+                        <a :href="reHref('latest',index)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+
+                <!-- 首頁 -->
+                <template v-for="(item,index) in newsData.home_t">
+                <li v-if="newSwitch.home">
+                    <a :href="reHref('home',0)">    
+                        <div class="listImg" :style="getbgi(item.img)"></div>
+                        <p class="listMsg">{{item.title}}</p>
+                    </a>
+                </li>
+                </template>
+                <template v-for="(item,index) in newsData.home_b">
+                    <li v-if="newSwitch.home">
+                        <a :href="reHref('home',index+1)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+
+                <!-- 投注建議 -->
+                <template v-for="(item,index) in newsData.lottery_t">
+                    <li v-if="newSwitch.lottery">
+                        <a :href="reHref('lottery',0)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+                <template v-for="(item,index) in newsData.lottery_b">
+                    <li v-if="newSwitch.lottery">
+                        <a :href="reHref('lottery',index+1)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+
+                <!-- 新聞 -->
+                <template v-for="(item,index) in newsData.news_t">
+                    <li v-if="newSwitch.news">
+                        <a :href="reHref('news',0)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+                <template v-for="(item,index) in newsData.news_b">
+                    <li v-if="newSwitch.news">
+                        <a :href="reHref('news',index+1)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+
+                <!-- 足球轉播 -->
+                <template v-for="(item,index) in newsData.broadcast">
+                    <li v-if="newSwitch.broadcast">
+                        <div class="mvBox">
+                            <div class="listMv">
+                                <iframe :src="reMvsrc(item.id)" frameborder="0" id="showMv" ></iframe>
+                                <div class="listMsg">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>     
+                        </div> 
+                    </li>
+                </template>
+
+                <!-- 資源 -->
+                <template v-for="(item,index) in newsData.resource">
+                    <li v-if="newSwitch.resource">
+                        <a :href="reHref('resource',index)">    
+                            <div class="listImg" :style="getbgi(item.img)"></div>
+                            <p class="listMsg">{{item.title}}</p>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== 基本會員資料(登錄時顯示) ===== -->
+    <div class="onSignin" ref="onSignin" v-show="mbrMsg.onLogin">
+        <div class="name"><p>{{mbrMsg.nickname}}</p></div>
+        <div class="points">
+            <div class="icon"></div>
+            <p>{{mbrMsg.points}}</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // ==== 會員基本資料 ====
+                mbrMsg: {
+                    nickname: indexVue.mbrMsg.nickname,
+                    points: indexVue.mbrMsg.points,
+                    onLogin: indexVue.mbrLogin
+                },
+
+                // ==== 輪播 ====
+                carousel: {
+                    maxSize: '',
+                    minSize: '',
+                    change: false,
+                },
+                // ==== 跑馬燈 ====
+                marquee: '',
+
+                // ==== 彩票公司推薦 ====
+                lottory: lottoryLink.main,
+
+                // ==== 新聞選擇menu ====
+                newsSel: {
+                    now: 'latest',
+                    list: newsMenu,
+                    more: true,
+                },
+
+                // ==== 新聞清單 ====
+                newSwitch: {
+                    latest: true,
+                    home: false,
+                    lottery: false,
+                    news: false,
+                    broadcast: false,
+                    resource: false,
+                },
+
+                newsData: {
+                    latest: '',
+                    home_t: [],
+                    home_b: [],
+                    lottery_t: [],
+                    lottery_b: [],
+                    news_t: [],
+                    news_b: [],
+                    broadcast: '',
+                    resource: []
+                }
+            };
+        },
+        methods: {
+            setSignin() {
+                let hdH = indexVue.$refs.header.offsetHeight;
+                this.$refs.onSignin.style.top = `${hdH}px`;
+            },
+            reHref(sort, index) {
+                let href = ''
+                switch (sort) {
+                    case 'latest':
+                        href = `#/latest/news?list=${index}`;
+                        break;
+                    case 'home':
+                        href = `#/home/news?list=${index}`;
+                        break;
+                    case 'lottery':
+                        href = `#/lottery/news?list=${index}`;
+                        break;
+                    case 'news':
+                        href = `#/news/news?list=${index}`;
+                        break;
+                    case 'resource':
+                        href = `#/resource/news?list=${index}`;
+                        break;
+                }
+                return href;
+            },
+            getbgi(data) {
+                return `background-image: url(${data})`;
+            },
+            chCarousel() {
+                let winW = document.body.clientWidth;
+                let winH = document.body.clientHeight;
+                this.carousel.change = winW <= winH ? true : false;
+            },
+            reMvsrc(data) {
+                return `https://www.youtube.com/embed/${data}`
+            },
+            getData() {
+                let self = this;
+                // 輪播
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/banner/list",
+                    dataType: "json",
+                    success: function(data) {
+                        self.carousel.maxSize = data.carousel;
+                        self.carousel.minSize = data.scarousel;
+
+                        self.$nextTick(function() {
+                            // 啟動輪播外掛
+                            $('#full_feature').swipeslider();
+                            $('#min_feature').swipeslider();
+                        })
+                    },
+                });
+
+                // 跑馬燈
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/marquee/list",
+                    dataType: "json",
+                    success: function(data) {
+                        self.marquee = data;
+                        self.$nextTick(function() {
+                            // 啟動跑馬燈外掛
+                            $("#marquee").marquee({
+                                pauseOnHover: true
+                            });
+                        })
+                    },
+                });
+
+                // ==== 新聞清單 ====
+                // 最新消息
+                $.ajax({
+                    url: 'https://www.vnc8888.com/api/homenews/list',
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.latest = data;
+                    },
+                });
+
+                // 首頁
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/homenews/top",
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.home_t.push(data);
+                    },
+                });
+
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/homenews/bottom",
+                    dataType: "json",
+                    success: function(data) {
+                        for (let i = 0; i < 4; i++) {
+                            self.newsData.home_b.push(data[i]);
+                        }
+                    },
+                });
+
+                // 投注建議
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/recommend/top",
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.lottery_t.push(data);
+                    },
+                });
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/match/news",
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.lottery_b = data;
+                    },
+                });
+
+                // 新聞
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/news/top",
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.news_t.push(data);
+                    },
+                });
+
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/news/bottom",
+                    dataType: "json",
+                    success: function(data) {
+                        for (let i = 0; i < 5; i++) {
+                            self.newsData.news_b.push(data[i])
+                        }
+                    },
+                });
+
+                // 足球轉播
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/video/list",
+                    dataType: "json",
+                    success: function(data) {
+                        self.newsData.broadcast = data;
+                    },
+                });
+
+                // 資源
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/resources/list",
+                    dataType: "json",
+                    success: function(data) {
+                        // 取前12筆
+                        for (let i = 0; i < 12; i++) {
+                            self.newsData.resource.push(data[i])
+                        }
+                    },
+                });
+
+            },
+            // ==== 視窗resize 及 卷軸事件 ====
+            winResize() {
+                window.scrollTo({
+                    top: 0
+                });
+                this.chCarousel();
+                this.showMore();
+                this.setSignin();
+            },
+            // ==== 新聞選擇 及 more提示 ====
+            scrollR() {
+                let boxW = this.$refs.selList.clientWidth;
+                let now = this.$refs.selList.scrollLeft
+                let list = document.querySelectorAll('.selList li');
+                let count = 0;
+                list.forEach(function(item) {
+                    count += item.offsetWidth;
+                })
+
+                this.$refs.selList.scrollLeft = count;
+            },
+
+            chSel(item) {
+                this.newsSel.now = item.data;
+                this.selNow();
+            },
+            selNow() {
+                let array = [];
+                let list = document.querySelectorAll('.selList li');
+                list.forEach(function(item) {
+                    array.push(item.getAttribute('data-name'));
+                });
+                $('.selList li').removeClass('on');
+                $(`.selList li:eq(${array.indexOf(this.newsSel.now)})`).addClass('on');
+                this.chNewList();
+            },
+            showMore() {
+                let boxW = this.$refs.selList.clientWidth;
+                let now = this.$refs.selList.scrollLeft
+                let list = document.querySelectorAll('.selList li');
+                let count = 0;
+                list.forEach(function(item) {
+                    count += item.offsetWidth;
+                })
+                this.newsSel.more = now >= count - boxW - 35 ? false : true;
+            },
+
+            chNewList() {
+                this.newSwitch.latest = false;
+                this.newSwitch.home = false;
+                this.newSwitch.lottery = false;
+                this.newSwitch.news = false;
+                this.newSwitch.broadcast = false;
+                this.newSwitch.resource = false;
+
+                switch (this.newsSel.now) {
+                    case 'latest':
+                        this.newSwitch.latest = true;
+                        break;
+                    case 'home':
+                        this.newSwitch.home = true;
+                        break;
+                    case 'lottery':
+                        this.newSwitch.lottery = true;
+                        break;
+                    case 'news':
+                        this.newSwitch.news = true;
+                        break;
+                    case 'broadcast':
+                        this.newSwitch.broadcast = true;
+                        break;
+                    case 'resource':
+                        this.newSwitch.resource = true;
+                        break;
+                }
+            }
+        },
+        mounted() {
+            this.chCarousel();
+            this.getData();
+            this.showMore();
+            this.selNow();
+            this.setSignin()
+
+            window.addEventListener('resize', this.winResize);
+            this.$refs.selList.addEventListener('scroll', this.showMore);
+
+            let hdH = indexVue.$refs.header.offsetHeight;
+            document.querySelector('.newsSel').style.top = `${hdH}px`;
+        },
+    }).mount("#page");
+</script>

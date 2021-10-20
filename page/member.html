@@ -1,0 +1,82 @@
+<div id="page">
+    <!-- ==== mbrBox start (我的) ==== -->
+    <div class="mbrBox" ref="mbrBox">
+        <div class="main">
+            <div class="avatar">
+                <div class="icon"></div>
+                <p>登入可享更多服務</p>
+            </div>
+            <div class="tool" v-show="!mbrLogin">
+                <div class="btn_linear_c2 btn" @click="signInMbr()">
+                    <button class="btn_cnt">登入</button>
+                </div>
+                <div class="btn_linear_c3 btn" @click="regdMbr()">
+                    <button class="btn_cnt">註冊</button>
+                </div>
+            </div>
+
+            <div class="tool" v-show="mbrLogin">
+                <div class="btn_linear_c3 btn" @click="signOut()">
+                    <button class="btn_cnt">登出</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <template v-for="(item,index) in aboutList">
+                    <li>
+                        <div class="icon">
+                            <img :src="item.img">
+                        </div>
+                        <span>{{item.title}}</span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // ==== 按鈕清單 ====
+                aboutList: aboutList,
+
+                // ==== 判斷會員是否為登入狀態 ====
+                mbrLogin: indexVue.mbrLogin,
+            };
+        },
+        methods: {
+            signOut() {
+                sessionStorage.removeItem('session');
+                setTimeout(function() {
+                    location.href = "#/home";
+                    location.reload();
+                }, 300)
+            },
+            setH() {
+                let fh = indexVue.$refs.ft.clientHeight;
+                let wH = window.screen.height;
+                this.$refs.mbrBox.style.height = `${wH - fh}px`
+            },
+            signInMbr() {
+                indexVue.dialog.main = true;
+                indexVue.dialog.signIn = true;
+                indexVue.verify("mainVerify");
+
+            },
+            regdMbr() {
+                indexVue.dialog.main = true;
+                indexVue.dialog.regd = true;
+                indexVue.verify("regdVerify");
+            }
+        },
+        mounted() {
+            this.setH();
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

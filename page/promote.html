@@ -1,0 +1,65 @@
+<div id="page">
+    <!-- ==== promoteBox start (廣告) ==== -->
+    <div class="promoteBox">
+        <div class="fullPhoto">
+            <ul>
+                <template v-for="(item,index) in eventBanner.top">
+                    <li><img :src="item.img"></li>
+                </template>
+            </ul>
+        </div>
+
+        <div class="columnPhoto">
+            <ul>
+                <template v-for="(item,index) in eventBanner.left">
+                    <li><img :src="item.img"></li>
+                </template>
+                <template v-for="(item,index) in eventBanner.right">
+                    <li><img :src="item.img"></li>
+                </template>
+            </ul>
+        </div>
+
+        <div class="fullPhoto">
+            <ul>
+                <template v-for="(item,index) in eventBanner.center">
+                    <li><img :src="item.img"></li>
+                </template>
+            </ul>
+        </div>
+
+        <div class="flexPhoto">
+            <ul>
+                <template v-for="(item,index) in eventBanner.bottom">
+                    <li><img :src="item.img"></li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                eventBanner:'',        
+            };
+        },
+        methods: {
+            getData() {
+                let self = this;
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/banner/list",
+                    dataType: "json",
+                    success: function(data) {
+                        self.eventBanner = data;
+                    },
+                });
+            }
+        },
+        mounted() {
+            this.getData();
+        },
+    }).mount("#page");
+</script>

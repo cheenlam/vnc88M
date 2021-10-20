@@ -1,0 +1,79 @@
+<div id="page">
+    <!-- ==== gameBox start (遊戲) ==== -->
+    <div class="gameBox" ref="gameBox" :style="{minHeight:boxH}" >
+        <!-- gameTitle start-->
+        <div class="gameTitle">
+            <img src="images/game/title.png">
+        </div>
+
+        <!-- gameList start -->
+        <div class="gameList">
+            <template v-for="(item,index) in gameList">
+                <li>
+                    <div class="main">
+                        <div class="gameImg">
+                            <img :src="item.img">
+                        </div>     
+                        <div class="title">
+                            <div class="tag">
+                                <div class="hot" v-if="item.hot">
+                                    <img src="images/icon/hot.gif">
+                                </div>
+                                <div class="new" v-if="item.new">
+                                    <img src="images/icon/new.gif">
+                                </div>
+                            </div>
+                            <span>{{item.title}}</span>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/playGame.png">
+                        <span>進入遊戲</span>
+                    </div>
+                </li>
+            </template>   
+        </div>
+    </div>
+
+    <!-- ===== 基本會員資料(登錄時顯示) ===== -->
+    <div class="onSignin" ref="onSignin" v-show="mbrMsg.onLogin">
+        <div class="name"><p>{{mbrMsg.nickname}}</p></div>
+        <div class="points">
+            <div class="icon"></div>
+            <p>{{mbrMsg.points}}</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                gameList:gameList,
+                boxH:'',
+
+                // ==== 會員基本資料 ====
+                mbrMsg: {
+                    nickname: indexVue.mbrMsg.nickname,
+                    points: indexVue.mbrMsg.points,
+                    onLogin: indexVue.mbrLogin,
+                },
+            };
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.boxH = `${cntH}px`;
+            },
+            setSignin() {
+                let hdH = indexVue.$refs.header.offsetHeight;
+                this.$refs.onSignin.style.top = `${hdH}px`;
+            },
+        },
+        mounted() {
+            this.setH();
+            this.setSignin()
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

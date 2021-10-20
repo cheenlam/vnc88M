@@ -1,0 +1,28 @@
+<div id="page">
+    <!-- ==== matchBox start (賽事) ==== -->
+    <div class="matchBox" ref="matchBox">
+        <iframe src="https://cheenlam.github.io/vncBongdalu/" width="100%" frameborder="0" ref="iframe">
+        </iframe>
+    </div>
+</div>
+
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {};
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.$refs.matchBox.style.height = `${cntH}px`;
+                this.$refs.iframe.height = cntH + 40;
+            }
+        },
+        mounted() {
+            this.setH();
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

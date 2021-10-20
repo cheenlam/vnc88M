@@ -1,0 +1,707 @@
+// ==== homeBox start (首頁) ====
+.homeBox {
+    // marquee start 跑馬燈
+    .marquee {
+        background: #0d1724;
+        color: #bac4d0;
+        font-size: 0.9rem;
+        .marqueeBox {
+            margin: auto;
+            .marquee_body {
+                cursor: pointer;
+            }
+            &>div {
+                height: 35px;
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+            }
+            .title {
+                margin-right: 10px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                img {
+                    width: 22px;
+                    margin-right: 3px;
+                    padding-top: 4px;
+                }
+            }
+            span {
+                flex-shrink: 0;
+                font-weight: bold;
+            }
+        }
+    }
+    // lottoryMsg start
+    .lottoryMsg {
+        background-color: #01081b;
+        overflow-x: auto;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.8) inset;
+        ul {
+            display: flex;
+        }
+        li {
+            min-width: 100px;
+            flex: 1;
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            position: relative;
+            a {
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 17px 8px 5px;
+            }
+            span {
+                @include txtChip(1);
+                text-align: center;
+            }
+            .hot {
+                width: 45px;
+                height: 10px;
+                background: url(../images/icon/hot.gif) no-repeat top center / cover;
+                margin: auto;
+                position: absolute;
+                @include pos(tlr, 5px, 0, 0);
+            }
+            .icon {
+                width: 33px;
+                height: 38px;
+                background: no-repeat center/contain;
+                margin-bottom: 5px;
+            }
+        }
+        li+li::before {
+            content: "";
+            width: 2px;
+            height: calc(100% - 10px);
+            margin: auto;
+            background: linear-gradient(0deg, transparent, #434343, transparent);
+            position: absolute;
+            @include pos(tbl, 0);
+        }
+    }
+    // newsSel start
+    .newsSel {
+        width: 100%;
+        background: linear-gradient(0deg, #1a1f28, #455167 95%, #626f8a);
+        box-shadow: 0 2px 4px #000;
+        font-size: 0.95rem;
+        position: sticky;
+        overflow: hidden;
+        z-index: 2;
+        .selList {
+            overflow-x: auto;
+        }
+        ul {
+            display: flex;
+        }
+        li {
+            height: 35px;
+            flex: 1;
+            padding: 0 25px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            position: relative;
+            cursor: pointer;
+            &.on {
+                color: #f7a807;
+            }
+            &.on::before {
+                content: "";
+                width: calc(100% - 20px);
+                height: 3px;
+                margin: auto;
+                background-color: #f7a807;
+                position: absolute;
+                @include pos(brl, 0);
+            }
+        }
+        .more {
+            width: 35px;
+            height: 35px;
+            box-shadow: -1px 0 5px #000;
+            background: #0b2d52 url(../images/icon/caret_R.svg) no-repeat center / 60% 60%;
+            position: absolute;
+            @include pos(tr, 0);
+        }
+    }
+    // fullList start
+    .fullList {
+        li {
+            padding: 10px;
+            position: relative;
+        }
+        li+li::before {
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: #666666;
+            box-shadow: 0 1px 2px #000;
+            position: absolute;
+            @include pos(tl, 0);
+        }
+        a {
+            display: flex;
+            align-items: center;
+        }
+        .listImg {
+            width: 220px;
+            height: 120px;
+            flex-shrink: 0;
+            margin-right: 10px;
+            background: #fff no-repeat center top/cover;
+            box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.8);
+            @include rwd(500) {
+                width: 120px;
+                height: 80px;
+            }
+        }
+        .listMsg {
+            font-weight: 500;
+            line-height: 20px;
+            @include txtChip(3);
+        }
+        .mvBox {
+            padding: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            .listMv {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                @include rwd(500) {
+                    width: 100%;
+                    margin: auto;
+                    display: unset;
+                    flex-shrink: 0;
+                    position: relative;
+                }
+                iframe {
+                    width: 100%;
+                    max-width: 250px;
+                    margin-right: 20px;
+                    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.8);
+                    background-color: #000;
+                    @include rwd(500) {
+                        max-width: 100%;
+                        margin: 0;
+                    }
+                }
+            }
+            .listMsg {
+                width: 80%;
+                height: 70px;
+                line-height: 25px;
+                @include txtChip(3);
+                @include rwd(500) {
+                    height: auto;
+                    @include txtChip(2);
+                    padding: 0 25px;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -10px;
+                    opacity: 0.8;
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        background-color: #000;
+                        transform: skew(-30deg) translateX(25px);
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                    &::before {
+                        content: "";
+                        width: 100%;
+                        height: 120%;
+                        background-color: #f00;
+                        box-shadow: -2px 0 4px #000;
+                        transform: skew(-30deg) translateX(18px);
+                        position: absolute;
+                        top: -5px;
+                        left: 0;
+                    }
+                    p {
+                        position: relative;
+                        transform: translateX(20px);
+                        z-index: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ==== matchBox start (賽事) ====
+.matchBox {
+    background-color: #fff;
+    iframe {
+        vertical-align: middle;
+    }
+}
+
+// ==== promoteBox start (廣告) ====
+.promoteBox {
+    padding: 0 10px;
+    .fullPhoto {
+        margin: 6px 0;
+        li+li {
+            margin-top: 7px;
+        }
+    }
+    .columnPhoto {
+        margin: 6px 0;
+        ul {
+            display: flex;
+        }
+        li {
+            flex: 1;
+        }
+        li+li {
+            margin-left: 6px;
+        }
+    }
+    .flexPhoto {
+        margin: 6px 0;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        li {
+            width: calc(50% - 3px);
+            &:nth-child(2) {
+                width: 100%;
+                margin-top: 6px;
+                order: 1;
+            }
+            &:nth-child(3) {
+                margin-left: 6px;
+            }
+        }
+    }
+}
+
+// ==== gameBox start (遊戲) ====
+.gameBox {
+    padding: 5px 0;
+    background: linear-gradient(180deg, #021020, #0b2d52 150px);
+    // gameTitle start
+    .gameTitle {
+        width: 80%;
+        max-width: 280px;
+        margin: 0 auto 10px;
+    }
+    // gameList start
+    .gameList {
+        li {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        li+li {
+            &::before {
+                content: "";
+                width: 100%;
+                height: 2px;
+                background-color: #090909;
+                box-shadow: 0 2px 2px #3d3d3d;
+                position: absolute;
+                @include pos(tl, 0);
+                transform: scaleY(0.6);
+            }
+        }
+        .main {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            .gameImg {
+                width: 45%;
+                max-width: 170px;
+                flex-shrink: 0;
+                border-radius: 10px;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                overflow: hidden;
+            }
+            .title {
+                padding-left: 10px;
+                color: #92a0c0;
+                .tag {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-bottom: 5px;
+                }
+                .hot {
+                    width: 60px;
+                    margin-right: 5px;
+                }
+                .new {
+                    width: 30px;
+                }
+                span {
+                    margin-top: 5px;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    @include txtChip(2);
+                }
+            }
+        }
+        .btn {
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            color: #ffbebc;
+            font-size: 0.7rem;
+            font-weight: bold;
+            &:active {
+                img {
+                    filter: brightness(1);
+                }
+            }
+            img {
+                width: 11vw;
+                max-width: 50px;
+                margin-bottom: 3px;
+                filter: brightness(0.5);
+            }
+        }
+    }
+}
+
+// ==== forumBox start (討論區) ====
+.forumBox {
+    padding-bottom: 10px;
+    background-color: #fff;
+    // obvious start
+    .obvious {
+        padding: 10px 15px;
+        background-color: #eee;
+        border-bottom: 1px solid #ccc;
+        border-style: dashed;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        z-index: 5;
+        .arrow {
+            width: 25px;
+            height: 25px;
+            flex-shrink: 0;
+            background: url(../images/icon/arrow_R.png) no-repeat center / cover;
+            &.left {
+                transform: rotate(180deg);
+            }
+        }
+        .obviousCnt {
+            width: 100%;
+            margin: 0 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.4) inset, 1px 1px 4px #404952;
+            overflow: hidden;
+            ul {
+                display: flex;
+            }
+            li {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                font-weight: bold;
+                color: #8fc31f;
+            }
+            span {
+                color: #0068b7;
+                padding-right: 5px;
+                flex-shrink: 0;
+            }
+            p {
+                @include txtChip(1);
+            }
+        }
+    }
+    // search start
+    .search {
+        padding: 10px;
+        position: relative;
+        .icon {
+            width: 16px;
+            height: 16px;
+            margin: auto;
+            background-image: url(../images/icon/search.svg);
+            position: absolute;
+            @include pos(tbr, 0, 0, 18px);
+        }
+        input {
+            width: 100%;
+            height: 40px;
+            padding: 0 30px 0 10px;
+            border-radius: 5px;
+            @include fullNone();
+            border-bottom: 1px solid rgb(204, 204, 204);
+            box-shadow: 0 2px 4px #999 inset;
+            color: #3d3d3d;
+            font-size: 1rem;
+        }
+    }
+    //sortList start (分類)
+    .sortList {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #a5a5a5;
+        @at-root .forumSort {
+            padding: 0 10px;
+            .forumSel {
+                margin-bottom: 5px;
+                padding: 10px 15px;
+                background: linear-gradient(0deg, #000, #272727);
+                box-shadow: 2px 2px 2px #999 inset;
+                color: #fff;
+                font-weight: bold;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                .icon {
+                    width: 20px;
+                    height: 20px;
+                    background: url(../images/icon/caret_R.svg) no-repeat center / cover;
+                    transform: rotate(90deg);
+                }
+            }
+            .selList {
+                width: 100%;
+                height: 100vh;
+                padding: 20px;
+                background-color: rgba(0, 0, 0, 0.9);
+                position: fixed;
+                @include pos(tl, 0);
+                z-index: 20;
+                transform: scale(0);
+                transition: transform 0.3s;
+                &.on {
+                    transform: scale(1);
+                }
+                .listCnt {
+                    max-height: 100%;
+                    overflow: scroll;
+                    border-radius: 10px;
+                    background-color: #fff;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: #555;
+                    .title {
+                        height: 55px;
+                        line-height: 55px;
+                        padding: 0 10px;
+                        text-align: center;
+                        border-bottom: 1px solid #999;
+                        background-color: #005cc8;
+                        color: #fff;
+                    }
+                    li {
+                        padding: 15px 20px;
+                    }
+                    li+li {
+                        border-top: 1px solid #999;
+                    }
+                    label {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    input[type="radio"] {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+    //forumTool start (功能按鈕)
+    .forumTool {
+        padding: 10px;
+        display: flex;
+        .btn {
+            height: 40px;
+            line-height: 40px;
+            flex: 1;
+        }
+        .btn+.btn {
+            margin-left: 10px;
+        }
+    }
+    // forumList start
+    .forumList {
+        margin-bottom: 10px;
+        padding: 0 10px;
+        table {
+            width: 100%;
+        }
+        tr {
+            &:nth-child(odd) {
+                background-color: #c9c9c9;
+            }
+        }
+        th {
+            padding: 5px;
+            background-color: #000;
+            color: #fff;
+        }
+        td {
+            padding: 5px;
+        }
+        th+th,
+        td+td {
+            border-left: 1px solid #b5b5b5;
+        }
+        .title {
+            font-size: 0.95rem;
+            color: #0068b7;
+            display: flex;
+            white-space: nowrap;
+            .tag {
+                margin-right: 5px;
+                color: #333;
+                position: relative;
+                &::before {
+                    content: "[";
+                    padding-right: 1px;
+                }
+                &::after {
+                    content: "]";
+                    padding-left: 1px;
+                }
+            }
+            p {
+                width: 100%;
+                @include txtChip(1);
+            }
+        }
+        .author {
+            font-size: 0.9rem;
+            color: #626262;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .avatar {
+                width: 40px;
+            }
+            .name {
+                max-width: 60px;
+                @include txtChip(1);
+            }
+            .msg {
+                padding-left: 5px;
+                white-space: nowrap;
+                text-align: center;
+            }
+            .time {
+                padding-top: 2px;
+                font-size: 0.7rem;
+            }
+        }
+    }
+}
+
+// ==== mbrBox start (我的 - 會員訊息頁) ====
+.mbrBox {
+    width: 100%;
+    overflow: scroll;
+    padding-bottom: 50px;
+    background-color: #fff;
+    position: fixed;
+    @include pos(tl, 0);
+    z-index: 10;
+    color: #000;
+    .main {
+        padding: 35px 10px;
+        background: url(../images/bg/aboutMe.jpg) no-repeat center / cover;
+    }
+    .avatar {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        font-size: 0.9rem;
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 5px;
+            background: url(../images/icon/avatar.png) no-repeat center/cover;
+        }
+    }
+    .tool {
+        display: flex;
+        justify-content: center;
+        .btn {
+            padding: 0 20px;
+            min-width: 100px;
+        }
+        .btn+.btn {
+            margin-left: 8px;
+        }
+    }
+    .menu {
+        table {
+            width: 100%;
+        }
+        tr {
+            display: flex;
+        }
+        td {
+            width: calc(100% / 3);
+            border: 1px solid #ccc;
+            &:first-child {
+                border-left: none;
+            }
+            &:last-child {
+                border-right: none;
+            }
+        }
+        .list {
+            height: 100%;
+            min-height: 90px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 0.9rem;
+        }
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        li {
+            width: calc(100% / 3);
+            min-height: 90px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            &:nth-child(3n) {
+                border-right: none;
+            }
+        }
+        .icon {
+            width: 35px;
+            margin-bottom: 3px;
+        }
+    }
+}

@@ -1,0 +1,201 @@
+<div id="page">
+    <div class="newsCnt">
+        <div class="newsCnt_main">
+            <div class="newstitle">
+                <div class="txt">
+                    <h2>vnc88</h2>
+                    <p>{{news.title}}</p>
+                </div>
+
+                <div class="time">{{news.time}}</div>
+            </div>
+            <div class="newsArticle" v-html="news.content" :class="sortClass">
+            </div>
+        </div>
+        <div class="btn_linear_c3 backBtn" @click="back()">
+            <button class="btn_cnt">回上一頁</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                news: {
+                    title: '',
+                    time: '',
+                    content: '',
+                },
+                set: {
+                    sort: '',
+                    num: 0,
+                },
+                sortClass:'',
+            };
+        },
+        methods: {
+            back() {
+                history.go(-1)
+            },
+            getData() {
+                this.set.sort = sessionStorage.getItem('news_sort');
+                this.set.num = sessionStorage.getItem('news_num');
+
+                switch (this.set.sort) {
+                    case 'latest':
+                        this.sortClass = 'home';
+                        this.getLatest();
+                        break;
+                    case 'home':
+                        this.sortClass = 'home';
+                        this.getHome();
+                        break;
+                    case 'lottery':
+                        this.sortClass = 'lottery';
+                        this.getLottery();
+                        break;
+                    case 'news':
+                    this.sortClass = 'news';
+                        this.getNews();
+                        break;
+                    case 'resource':
+                        this.sortClass = 'resources';
+                        this.getResource();
+                        break;
+                }
+            },
+            // 最新消息
+            getLatest() {
+                let self = this;
+                $.ajax({
+                    url: 'https://www.vnc8888.com/api/homenews/list',
+                    dataType: "json",
+                    success: function(data) {
+                        self.news.title = data[self.set.num].detail.title;
+                        self.news.time = data[self.set.num].detail.time;
+                        self.news.content = data[self.set.num].detail.content;
+                    },
+                });
+            },
+            // 首頁
+            getHome() {
+                let self = this;
+                if (this.set.num == 0) {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/homenews/top",
+                        dataType: "json",
+                        success: function(data) {
+                            self.news.title = data.detail.title;
+                            self.news.time = data.detail.time;
+                            self.news.content = data.detail.content;
+                        },
+                    });
+                } else {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/homenews/bottom",
+                        dataType: "json",
+                        success: function(data) {
+                            for (let i = 0; i < 4; i++) {
+                                self.news.title = data[self.set.num - 1].detail.title;
+                                self.news.time = data[self.set.num - 1].detail.time;
+                                self.news.content = data[self.set.num - 1].detail.content;
+                            }
+                        },
+                    });
+                }
+            },
+            // 投注建議
+            getLottery() {
+                let self = this;
+                if (this.set.num == 0) {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/recommend/top",
+                        dataType: "json",
+                        success: function(data) {
+                            self.news.title = data.title;
+                            self.news.time = '';
+                            self.news.content = data.content;
+
+                            self.$nextTick(function() {
+                                setTimeout(function() {
+                                    let eashImg = document.querySelectorAll('.size-full');
+                                    eashImg.forEach(function(item) {
+                                        let getSrc = item.getAttribute("data-lazy-src")
+                                        item.setAttribute("src", getSrc)
+                                    })
+                                }, 500)
+                            })
+                        },
+                    });
+                } else {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/match/news",
+                        dataType: "json",
+                        success: function(data) {
+                            for (let i = 0; i < 4; i++) {
+                                self.news.title = data[self.set.num - 1].title;
+                                self.news.time = '';
+                                self.news.content = data[self.set.num - 1].content;
+                            }
+
+                            self.$nextTick(function() {
+                                setTimeout(function() {
+                                    let eashImg = document.querySelectorAll('.size-full');
+                                    eashImg.forEach(function(item) {
+                                        let getSrc = item.getAttribute("data-lazy-src")
+                                        item.setAttribute("src", getSrc)
+                                    })
+                                }, 500)
+                            })
+                        },
+                    });
+                }
+            },
+            // 新聞
+            getNews(){
+                let self = this;
+                if (this.set.num == 0) {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/news/top",
+                        dataType: "json",
+                        success: function(data) {
+                            self.news.title = data.content.title;
+                            self.news.time = data.content.time;;
+                            self.news.content = data.content.content;
+                        },
+                    });
+                } else {
+                    $.ajax({
+                        url: "https://www.vnc8888.com/api/news/bottom",
+                        dataType: "json",
+                        success: function(data) {
+                            for (let i = 0; i < 4; i++) {
+                                self.news.title = data[self.set.num - 1].content.title;
+                                self.news.time = data[self.set.num - 1].content.time;
+                                self.news.content = data[self.set.num - 1].content.content;
+                            }
+                        },
+                    });
+                }
+            },
+            // 資源
+            getResource(){
+                let self = this;
+                $.ajax({
+                    url: 'https://www.vnc8888.com/api/resources/list',
+                    dataType: "json",
+                    success: function(data) {
+                        self.news.title = data[self.set.num].title;
+                        self.news.time = '';
+                        self.news.content = data[self.set.num].content;
+                    },
+                });
+            }
+        },
+        mounted() {
+            this.getData();
+        },
+    }).mount("#page");
+</script>

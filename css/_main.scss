@@ -1,0 +1,617 @@
+body {
+    background-color: #01081b;
+    &::before {
+        content: "";
+        width: 100%;
+        height: 150vh;
+        background: #0b2d53 url(../images/bg/body.jpg) no-repeat center bottom / cover;
+        position: fixed;
+        z-index: -1;
+        @include pos(lb, 0);
+        opacity: 0.3;
+        transform: translateY(25%);
+    }
+}
+
+img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+// 預設按鈕樣式
+.btn_linear_c1 {
+    @include btn_linear(#fff, #ffff00, #f14c0a, #f8b107);
+}
+
+.btn_linear_c2 {
+    @include btn_linear(#fff, #898989, #212121, #676767);
+}
+
+.btn_linear_c3 {
+    @include btn_linear(#fff, #fe4436, #8e041d, #da001a);
+}
+
+.btn_linear_c4 {
+    @include btn_linear(#fff, #fff, #3f67c0, #5e89e4);
+}
+
+.btn_linear_c5 {
+    @include btn_linear(#fff, #f8d66f, #887538, #b1994f);
+}
+
+// ===== header start =====
+.header {
+    width: 100%;
+    background-color: #041f3c;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    &::before {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #000, #fff, #000);
+        position: absolute;
+        @include pos(lb, -2px);
+        border-radius: 10px;
+        z-index: -1;
+        opacity: 0.4;
+    }
+
+    .top {
+        height: 55px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .homeBtn {
+            width: 35px;
+            margin-top: 5px;
+        }
+        .hd_logo {
+            width: 220px;
+            margin: 0 20px;
+        }
+        .menuBer {
+            width: 35px;
+        }
+    }
+}
+
+.onSignin {
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    @include pos(tl, 0);
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    & > div {
+        width: 50%;
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+    p {
+        @include txtChip(1);
+    }
+    .name {
+        color: #cad7e5;
+    }
+    .points {
+        color: #dcb316;
+        position: relative;
+        &::before {
+            content: "";
+            width: 1px;
+            height: 90%;
+            margin: auto;
+            background: linear-gradient(0deg, transparent, #71784c, transparent);
+            position: absolute;
+            @include pos(tlb, 0);
+        }
+        .icon {
+            width: 23px;
+            height: 23px;
+            flex-shrink: 0;
+            margin-right: 5px;
+            background: url(../images/icon/points.png) no-repeat center / cover;
+        }
+    }
+}
+
+// ===== content start =====
+.content {
+    min-height: calc(100vh - 120px);
+    color: #fff;
+}
+
+// ===== ftMenu start =====
+.ftMenu {
+    width: 100%;
+    background: linear-gradient(0deg, #121211, #313131);
+    position: sticky;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    bottom: 0;
+    z-index: 5;
+    overflow: hidden;
+    ul {
+        display: flex;
+    }
+    li {
+        min-height: 65px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        flex: 1;
+        color: #c4c4c4;
+        font-weight: bold;
+        &.on {
+            background: linear-gradient(0deg, #7d0000, #ff0000);
+        }
+    }
+    .icon {
+        max-width: 42px;
+        margin: auto;
+        margin-bottom: 2px;
+    }
+    a {
+        width: 100%;
+        height: 100%;
+    }
+    p {
+        text-align: center;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+// ==== sideList start (側邊選單) ====
+.sideList {
+    width: 100%;
+    color: #e5e5e5;
+    position: fixed;
+    right: 0;
+    z-index: 30;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    display: flex;
+    justify-content: flex-end;
+    &.on {
+        transform: translateX(0%);
+    }
+    .close{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        @include pos(tl,0);
+        z-index: -1;
+        background-color: #102d4d8c;
+    }
+    .sideBody {
+        width: 230px;
+        height: 100%;
+        max-width: 90%;
+        padding: 20px 15px;
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow-y: auto;
+    }
+    .badge {
+        width: 100px;
+        margin: auto;
+    }
+    .mbrMsg {
+        padding: 15px 0;
+        position: relative;
+        &::before {
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: #fff;
+            transform: scaleY(0.3);
+            opacity: 0.8;
+            position: absolute;
+            @include pos(lb, 0);
+        }
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .renew {
+            width: 25px;
+            height: 20px;
+            margin-left: 10px;
+            background: url(../images/icon/renew.png) no-repeat center / cover;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+    .list {
+        padding: 5px 0;
+        position: relative;
+        font-weight: bold;
+        &::before {
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: #fff;
+            transform: scaleY(0.3);
+            opacity: 0.8;
+            position: absolute;
+            @include pos(lb, 0);
+        }
+        a {
+            padding: 15px 0;
+            display: block;
+        }
+    }
+    .btnBox {
+        padding-top: 20px;
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+// ==== dialogBox start (彈窗) ====
+.dialogBox {
+    width: 100%;
+    height: 100vh;
+    padding: 30px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    z-index: 50;
+    @include pos(tl, 0);
+    display: none;
+    &.on {
+        display: block;
+        animation: dialogBox 0.5s forwards;
+    }
+
+    @at-root .dialogBody {
+        width: 100%;
+        height: 100%;
+        padding: 20px 10px;
+        background: linear-gradient(0deg, #091422, #0e263c);
+        box-shadow: 5px 5px 10px #000;
+        border: 1px solid #f6bf3d;
+        border-image: linear-gradient(0deg, #f6bf3d, #7a5d17, #f6bf3d) 1 1 round;
+        position: relative;
+        flex-direction: column;
+        display: none;
+        &.on {
+            display: flex;
+            animation: dialogBox 0.5s forwards;
+        }
+
+        .title {
+            flex-shrink: 0;
+            margin-bottom: 20px;
+            padding: 10px 25px;
+            color: #e9b21a;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-align: center;
+            position: relative;
+            &::before {
+                content: "";
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #71784c, transparent);
+                position: absolute;
+                margin: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 50%;
+            }
+        }
+        .close {
+            width: 38px;
+            height: 38px;
+            z-index: 1;
+            position: absolute;
+            @include pos(tr, 5px);
+            &:before,
+            &:after {
+                content: "";
+                width: 100%;
+                height: 1px;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #818b99;
+            }
+            &::before {
+                transform: rotate(45deg);
+            }
+            &::after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    form {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    @at-root .dialogCnt {
+        height: 100%;
+        overflow-y: auto;
+        padding: 0 5px 20px;
+        .item {
+            padding-bottom: 15px;
+            position: relative;
+            .itemIpt {
+                height: 35px;
+                padding: 0 5px;
+                display: flex;
+                align-items: center;
+                background-color: #100f1f;
+                box-shadow: 0 0 6px #000 inset, 0 1px 1px #313a5c;
+                border-radius: 3px;
+            }
+        }
+
+        label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            span {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                color: #869bae;
+                flex-shrink: 0;
+                font-weight: bold;
+                letter-spacing: 3px;
+                font-size: 0.95rem;
+                &::after {
+                    content: ":";
+                    padding: 0 3px;
+                }
+            }
+
+            input {
+                width: 100%;
+                height: 100%;
+                @include fullNone;
+                font-size: 0.95rem;
+                color: #fff;
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus {
+                    box-shadow: 0 0 0 30px #100f1f inset;
+                    -webkit-text-fill-color: #d7e4f9;
+                }
+            }
+        }
+
+        .errorTxt {
+            width: 100%;
+            padding: 5px 0 0 5px;
+            color: rgb(241, 41, 41);
+            font-size: 0.8rem;
+        }
+
+        .QBtn {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .btn {
+                width: calc(100% - 5px);
+                height: calc(100% - 8px);
+                div {
+                    width: 100%;
+                    height: 100%;
+                    background: url(../images/icon/question.png) no-repeat center;
+                }
+            }
+        }
+
+        .item.code {
+            .itemIpt {
+                padding: 0;
+                background: none;
+                box-shadow: none;
+            }
+            label {
+                padding: 0 5px;
+                margin-right: 8px;
+                background-color: #100f1f;
+                box-shadow: 0 0 6px #000 inset, 0 1px 1px #313a5c;
+                border-radius: 3px;
+            }
+        }
+
+        .itemSel {
+            height: 100%;
+            padding: 0 3px 0 10px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #fff;
+            position: relative;
+            &::before {
+                content: "";
+                width: 1px;
+                height: calc(100% - 10px);
+                margin: auto;
+                background-color: #485d70;
+                position: absolute;
+                @include pos(tbl, 0);
+            }
+            .icon {
+                width: 13px;
+                margin-left: 8px;
+            }
+        }
+
+        .itemSelList {
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            transform: scale(0);
+            transition: transform 0.3s;
+            &.on {
+                transform: scale(1);
+            }
+            .listCnt {
+                max-height: 100%;
+                overflow: scroll;
+                border-radius: 10px;
+                background-color: #fff;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #555;
+            }
+            .title {
+                height: 55px;
+                line-height: 55px;
+                padding: 0 10px;
+                margin-bottom: 0;
+                text-align: center;
+                font-size: 1.2rem;
+                border-bottom: 1px solid #999;
+                background-color: #005cc8;
+                color: #fff;
+                &::before {
+                    display: none;
+                }
+            }
+            li {
+                padding: 15px 20px;
+            }
+            li + li {
+                border-top: 1px solid #999;
+            }
+            label {
+                display: flex;
+                justify-content: space-between;
+            }
+            span {
+                font-size: 1.2rem;
+                &::after {
+                    display: none;
+                }
+            }
+            input {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .nbCode {
+            width: 80px;
+            display: flex;
+            cursor: pointer;
+            user-select: none;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .btnBox {
+            padding-top: 40px;
+            display: flex;
+            @include rwd(500) {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+            }
+            .btn + .btn {
+                margin-left: 8px;
+                @include rwd(500) {
+                    margin-left: 0;
+                    margin-top: 8px;
+                }
+            }
+        }
+
+        .quickLogin {
+            .describe {
+                padding: 60px 0 20px;
+                color: #fff;
+                text-align: center;
+            }
+            .quickBtn {
+                .btn {
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                }
+                .btn + .btn {
+                    margin-top: 8px;
+                }
+            }
+        }
+    }
+
+    @at-root .check_cnt {
+        max-width: 450px;
+        margin: 10px 0;
+        color: #626262;
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        letter-spacing: 1px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        label {
+            width: auto;
+        }
+        a {
+            color: #00a0e9;
+            font-weight: bold;
+        }
+        .ckBox {
+            margin-right: 10px;
+            cursor: pointer;
+            & > div {
+                width: 25px;
+                height: 25px;
+                background: #100f1f;
+                box-shadow: 0 0 6px #000 inset, 0 1px 1px #313a5c;
+                border-radius: 5px;
+            }
+            input {
+                display: none;
+            }
+            input:checked + div {
+                background: url(../images/icon/tick.png) no-repeat center / 90%;
+            }
+        }
+    }
+}
+
+@keyframes dialogBox {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
