@@ -59,8 +59,11 @@
             },
             setH() {
                 let fh = indexVue.$refs.ft.clientHeight;
-                let wH = window.screen.height;
-                this.$refs.mbrBox.style.height = `${wH - fh}px`
+                let wH = document.body.clientHeight;
+
+                console.log(fh)
+                console.log(wH)
+                this.$refs.mbrBox.style.height = `${wH -fh}px`
             },
             signInMbr() {
                 indexVue.dialog.main = true;
