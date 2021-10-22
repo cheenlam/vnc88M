@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
   margin: 0;
   padding: 0;
@@ -708,6 +709,7 @@ img {
 
 .header .top .menuBer {
   width: 35px;
+  cursor: pointer;
 }
 
 .onSignin {
@@ -785,7 +787,7 @@ img {
 }
 
 .content {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 121px);
   color: #fff;
 }
 
@@ -797,7 +799,7 @@ img {
   position: sticky;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   bottom: 0;
-  z-index: 5;
+  z-index: 15;
   overflow: hidden;
 }
 
@@ -877,6 +879,12 @@ img {
           transform: translateX(0%);
 }
 
+.sideList.on .close {
+  background-color: #102d4d8c;
+  -webkit-transition: .2s .2s;
+  transition: .2s .2s;
+}
+
 .sideList .close {
   width: 100%;
   height: 100%;
@@ -884,7 +892,6 @@ img {
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: #102d4d8c;
 }
 
 .sideList .sideBody {
@@ -958,6 +965,10 @@ img {
   position: absolute;
   left: 0;
   bottom: 0;
+}
+
+.sideList .list li {
+  cursor: pointer;
 }
 
 .sideList .list a {
@@ -1233,82 +1244,21 @@ img {
   margin-left: 8px;
 }
 
-.dialogCnt .itemSelList {
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-}
-
-.dialogCnt .itemSelList.on {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.dialogCnt .itemSelList .listCnt {
-  max-height: 100%;
-  overflow: scroll;
-  border-radius: 10px;
-  background-color: #fff;
+.dialogCnt .selList .title {
   font-size: 1.2rem;
-  font-weight: bold;
+}
+
+.dialogCnt .selList .title::before {
+  display: none;
+}
+
+.dialogCnt .selList span {
   color: #555;
-}
-
-.dialogCnt .itemSelList .title {
-  height: 55px;
-  line-height: 55px;
-  padding: 0 10px;
-  margin-bottom: 0;
-  text-align: center;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #999;
-  background-color: #005cc8;
-  color: #fff;
-}
-
-.dialogCnt .itemSelList .title::before {
-  display: none;
-}
-
-.dialogCnt .itemSelList li {
-  padding: 15px 20px;
-}
-
-.dialogCnt .itemSelList li + li {
-  border-top: 1px solid #999;
-}
-
-.dialogCnt .itemSelList label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.dialogCnt .itemSelList span {
   font-size: 1.2rem;
 }
 
-.dialogCnt .itemSelList span::after {
+.dialogCnt .selList span::after {
   display: none;
-}
-
-.dialogCnt .itemSelList input {
-  width: 20px;
-  height: 20px;
 }
 
 .dialogCnt .nbCode {
@@ -1587,7 +1537,7 @@ img {
   z-index: 2;
 }
 
-.homeBox .newsSel .selList {
+.homeBox .newsSel .newsList {
   overflow-x: auto;
 }
 
@@ -2160,7 +2110,7 @@ img {
           transform: rotate(90deg);
 }
 
-.forumSort .selList {
+.selList {
   width: 100%;
   height: 100vh;
   padding: 20px;
@@ -2177,14 +2127,14 @@ img {
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
-.forumSort .selList.on {
+.selList.on {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 
-.forumSort .selList .listCnt {
+.selList .listCnt {
   max-height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
   border-radius: 10px;
   background-color: #fff;
   font-size: 1.2rem;
@@ -2192,7 +2142,7 @@ img {
   color: #555;
 }
 
-.forumSort .selList .listCnt .title {
+.selList .listCnt .title {
   height: 55px;
   line-height: 55px;
   padding: 0 10px;
@@ -2202,15 +2152,15 @@ img {
   color: #fff;
 }
 
-.forumSort .selList .listCnt li {
+.selList .listCnt li {
   padding: 15px 20px;
 }
 
-.forumSort .selList .listCnt li + li {
+.selList .listCnt li + li {
   border-top: 1px solid #999;
 }
 
-.forumSort .selList .listCnt label {
+.selList .listCnt label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2219,7 +2169,7 @@ img {
           justify-content: space-between;
 }
 
-.forumSort .selList .listCnt input[type="radio"] {
+.selList .listCnt input[type="radio"] {
   width: 20px;
   height: 20px;
 }
@@ -2349,7 +2299,7 @@ img {
 
 .mbrBox {
   width: 100%;
-  overflow: scroll;
+  height: 100vh;
   padding-bottom: 50px;
   background-color: #fff;
   position: fixed;
@@ -2357,6 +2307,7 @@ img {
   left: 0;
   z-index: 10;
   color: #000;
+  overflow-y: auto;
 }
 
 .mbrBox .main {
@@ -2507,6 +2458,317 @@ img {
 .aboutMe .txt {
   padding: 20px 0;
   line-height: 1.8rem;
+}
+
+.annBox {
+  padding: 20px;
+  min-height: 100%;
+  color: #fff;
+  background: linear-gradient(180deg, #021020, #0b2d52 150px);
+}
+
+.annBox .title {
+  padding-bottom: 20px;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.annBox li.on .icon {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.annBox li.on .listCnt {
+  display: block;
+}
+
+.annBox li + li {
+  margin-top: 15px;
+}
+
+.annBox .listTitle {
+  height: 45px;
+  padding: 0 10px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: #a1a1a1;
+  -webkit-box-shadow: -1px 1px 2px #898989 inset ,1px 1px 4px #000;
+          box-shadow: -1px 1px 2px #898989 inset ,1px 1px 4px #000;
+  background: -webkit-gradient(linear, left bottom, left top, from(#111111), to(#5c5c5c));
+  background: linear-gradient(0deg, #111111, #5c5c5c);
+}
+
+.annBox .listTitle.on {
+  color: #fff;
+  -webkit-box-shadow: -1px 1px 2px #dadada inset, 1px 1px 24px #000;
+          box-shadow: -1px 1px 2px #dadada inset, 1px 1px 24px #000;
+  background: -webkit-gradient(linear, left bottom, left top, from(#4f4f4f), to(#a5a5a5));
+  background: linear-gradient(0deg, #4f4f4f, #a5a5a5);
+}
+
+.annBox .listTitle .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.annBox .listTitle .time {
+  padding-top: 3px;
+  margin-right: 10px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.annBox .listTitle .txt {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  margin-right: 20px;
+}
+
+.annBox .listTitle .icon {
+  width: 22px;
+  height: 45px;
+  line-height: 45px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.annBox .listCnt {
+  display: none;
+  margin-top: 8px;
+  padding: 0 10px 40px;
+  background-color: #313131;
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.75) inset, 1px 1px 4px #000;
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.75) inset, 1px 1px 4px #000;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  color: #ddd;
+  font-size: 1rem;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+}
+
+.annBox .listCnt .top {
+  padding: 20px 0;
+  font-weight: bold;
+  border-bottom: 1px solid #a5a5a5;
+}
+
+.annBox .listCnt .top li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.annBox .listCnt .top li + li {
+  margin-top: 8px;
+}
+
+.annBox .listCnt .top span {
+  padding-right: 10px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  position: relative;
+}
+
+.annBox .listCnt .top span::after {
+  content: "：";
+}
+
+.annBox .listCnt .top p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.annBox .listCnt .bottom {
+  padding: 20px 0;
+  line-height: 24px;
+}
+
+.suggestBox {
+  padding: 20px;
+  color: #fff;
+  background: linear-gradient(180deg, #021020, #0b2d52 150px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.suggestBox .title {
+  padding-bottom: 20px;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.suggestBox .suggestBody {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.suggestBox .suggestSel {
+  height: 45px;
+  padding: 0 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: -1px 1px 2px #a0a0a0 inset;
+          box-shadow: -1px 1px 2px #a0a0a0 inset;
+  background: -webkit-gradient(linear, left bottom, left top, from(#2f2f2f), to(#4f4f4f));
+  background: linear-gradient(0deg, #2f2f2f, #4f4f4f);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 1px 1px 4px #000;
+          box-shadow: 1px 1px 4px #000;
+}
+
+.suggestBox .suggestSel p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  color: #CECECE;
+}
+
+.suggestBox .suggestSel .icon {
+  width: 22px;
+  height: 45px;
+  margin-left: 20px;
+  line-height: 45px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.suggestBox .suggestMsg {
+  width: 100%;
+  height: 250px;
+  padding: 0 15px 15px;
+  margin: 10px 0 25px;
+  background-color: #444;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 4px #000;
+          box-shadow: 1px 1px 4px #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.suggestBox .suggestMsg .slogan {
+  padding: 10px 0;
+  color: #7f8188;
+  font-weight: bold;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  font-size: 0.95rem;
+}
+
+.suggestBox .suggestMsg textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 10px;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 22px;
+  resize: none;
+  border-radius: 5px;
+  background-color: #2C2D2F;
+  -webkit-box-shadow: 0 2px 4px #000 inset;
+          box-shadow: 0 2px 4px #000 inset;
+}
+
+.suggestBox .btnBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media screen and (max-width: 500px) {
+  .suggestBox .btnBox {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.suggestBox .btnBox .btn {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 40px;
+  line-height: 40px;
+}
+
+.suggestBox .btnBox .btn + .btn {
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .suggestBox .btnBox .btn + .btn {
+    margin-left: 0px;
+    margin-top: 8px;
+  }
 }
 
 .newsCnt {

@@ -1,0 +1,121 @@
+<div id="page">
+    <!-- ==== annBox start (站內公告) ==== -->
+    <div class="annBox" ref="annBox">
+        <div class="title">最新消息</div>
+        <div class="annList">
+            <ul>
+                <template v-for="(item,index) in list">
+                    <li :class="{'on':item.switch}" @click="addRecord(item)">
+                        <div class="listTitle" :class="{'on':item.record}" @click="test(item)">
+                            <div class="main">
+                                <div class="time" v-html="reDate(item.stime)"></div>
+                                <div class="txt">{{item.title}}</div>
+                            </div>  
+                            <div class="icon">
+                                <img src="images/icon/arrow_B.png">
+                            </div>
+                        </div>
+                        <div class="listCnt">
+                            <div class="top">
+                                <ul>
+                                    <li>
+                                        <span>時間</span>
+                                        <p class="time" v-html="reTime(item.stime)"><p> 
+                                    </li>
+                                    <li>
+                                        <span>主旨</span>
+                                        <p>{{item.title}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bottom">{{item.txt}}</div>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                list: ''
+            };
+        },
+        methods: {
+            test(item) {
+                for (let i in this.list) {
+                    this.list[i].switch = false
+                }
+                item.switch = !item.switch
+            },
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.$refs.annBox.style.minHeight = `${cntH}px`
+            },
+            reDate(time) {
+                let date = new Date(time * 1000)
+                let y = date.getFullYear();
+                let m = String(date.getMonth() + 1).padStart(2, '0');
+                let d = String(date.getDate()).padStart(2, '0');
+                return `${y}-${m}-${d}`
+            },
+            reTime(time) {
+                let date = new Date(time * 1000)
+                let y = date.getFullYear();
+                let m = String(date.getMonth() + 1).padStart(2, '0');
+                let d = String(date.getDate()).padStart(2, '0');
+                let th = String(date.getHours()).padStart(2, '0');
+                let ts = String(date.getMinutes()).padStart(2, '0');
+                let tm = String(date.getSeconds()).padStart(2, '0');
+                return `${y}-${m}-${d} ${th}:${ts}:${tm}`
+            },
+            getData() {
+                let self = this;
+                $.ajax({
+                    url: "https://www.vnc8888.com/api/marquee/list",
+                    dataType: "json",
+                    success: function(data) {
+                        self.list = data;
+                        self.list.forEach(function(item) {
+                            item.switch = false;
+                            item.record = false;
+                            item.ann = `${item.stime}${item.title}`;
+                        });
+                       
+                        self.$nextTick(function() {
+                            self.list[0].switch = true;
+                            self.ckRecord();
+                        })
+                    },
+                });
+            },
+            // ===== 檢查消息紀錄 & 紀錄操作=====
+            ckRecord() {
+                let list = localStorage.getItem('record') == null ? [] : JSON.parse(localStorage.getItem('record'));
+                this.list.forEach(function(data) {
+                   if(list.indexOf(data.ann) != -1){
+                        data.record = true
+                   }
+                });
+            },
+            addRecord(item) {
+                let key = item.ann
+                let list = localStorage.getItem('record') == null ? [] : JSON.parse(localStorage.getItem('record'));
+
+                if (list.indexOf(key) == -1) {
+                    list.push(key);
+                    localStorage.setItem('record', JSON.stringify(list));
+                    this.ckRecord();
+                }
+            }
+        },
+        mounted() {
+            this.setH();
+            this.getData();
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

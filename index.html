@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div id="indexBox">
+    <div id="indexBox" class="indexBox">
         <!-- ===== header start ===== -->
         <div class="header" id="header" ref="header">
             <div class="top">
@@ -85,8 +85,8 @@
                 <div class="list" @click="sideList = false">
                     <ul>
                         <li><a href="#/aboutMe">關於我們</a></li>
-                        <li><a>最新消息</a></li>
-                        <li><a>意見反饋</a></li>
+                        <li><a href="#/ann">最新消息</a></li>
+                        <li @click="suggest()"><a>意見反饋</a></li>
                     </ul>
                 </div>
 
@@ -267,13 +267,7 @@
                                     </div>
                                 </div>
 
-                                <!-- forgetMbr:{
-                                    switch: false,
-                                    checked: 0,
-                                    list: forgetList,
-                                    txt: '',
-                                } -->
-                                <div class="itemSelList" :class="{'on':forgetMbr.switch}">
+                                <div class="selList" :class="{'on':forgetMbr.switch}">
                                     <div class="listCnt">
                                         <div class="title">認證方式</div>
                                         <div class="list">
@@ -413,6 +407,18 @@
                     let winH = document.body.clientHeight;
                     this.$refs.sideList.style.height = `${winH - hdH}px`;
                     this.$refs.sideList.style.top = `${hdH}px`;
+                },
+                // ==== 意見反饋 ====
+                suggest() {
+                    let session = sessionStorage.getItem('session');
+
+                    if (session == null) {
+                        this.dialog.main = true;
+                        this.dialog.signIn = true;
+                        this.verify("mainVerify");
+                    } else {
+                        location.href = "#/suggest"
+                    }
                 },
                 // ==== 驗證碼 ====
                 verify(name) {

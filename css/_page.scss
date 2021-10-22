@@ -10,7 +10,7 @@
             .marquee_body {
                 cursor: pointer;
             }
-            &>div {
+            & > div {
                 height: 35px;
                 padding: 0 10px;
                 display: flex;
@@ -73,7 +73,7 @@
                 margin-bottom: 5px;
             }
         }
-        li+li::before {
+        li + li::before {
             content: "";
             width: 2px;
             height: calc(100% - 10px);
@@ -92,7 +92,7 @@
         position: sticky;
         overflow: hidden;
         z-index: 2;
-        .selList {
+        .newsList {
             overflow-x: auto;
         }
         ul {
@@ -137,7 +137,7 @@
             padding: 10px;
             position: relative;
         }
-        li+li::before {
+        li + li::before {
             content: "";
             width: 100%;
             height: 1px;
@@ -253,7 +253,7 @@
     padding: 0 10px;
     .fullPhoto {
         margin: 6px 0;
-        li+li {
+        li + li {
             margin-top: 7px;
         }
     }
@@ -265,7 +265,7 @@
         li {
             flex: 1;
         }
-        li+li {
+        li + li {
             margin-left: 6px;
         }
     }
@@ -309,7 +309,7 @@
             align-items: center;
             position: relative;
         }
-        li+li {
+        li + li {
             &::before {
                 content: "";
                 width: 100%;
@@ -481,7 +481,7 @@
                     transform: rotate(90deg);
                 }
             }
-            .selList {
+            @at-root .selList {
                 width: 100%;
                 height: 100vh;
                 padding: 20px;
@@ -496,7 +496,7 @@
                 }
                 .listCnt {
                     max-height: 100%;
-                    overflow: scroll;
+                    overflow-y: auto;
                     border-radius: 10px;
                     background-color: #fff;
                     font-size: 1.2rem;
@@ -514,7 +514,7 @@
                     li {
                         padding: 15px 20px;
                     }
-                    li+li {
+                    li + li {
                         border-top: 1px solid #999;
                     }
                     label {
@@ -538,7 +538,7 @@
             line-height: 40px;
             flex: 1;
         }
-        .btn+.btn {
+        .btn + .btn {
             margin-left: 10px;
         }
     }
@@ -562,8 +562,8 @@
         td {
             padding: 5px;
         }
-        th+th,
-        td+td {
+        th + th,
+        td + td {
             border-left: 1px solid #b5b5b5;
         }
         .title {
@@ -618,13 +618,14 @@
 // ==== mbrBox start (我的 - 會員訊息頁) ====
 .mbrBox {
     width: 100%;
-    overflow: scroll;
+    height: 100vh;
     padding-bottom: 50px;
     background-color: #fff;
     position: fixed;
     @include pos(tl, 0);
     z-index: 10;
     color: #000;
+    overflow-y: auto;
     .main {
         padding: 35px 10px;
         background: url(../images/bg/aboutMe.jpg) no-repeat center / cover;
@@ -650,7 +651,7 @@
             padding: 0 20px;
             min-width: 100px;
         }
-        .btn+.btn {
+        .btn + .btn {
             margin-left: 8px;
         }
     }
@@ -706,25 +707,235 @@
     }
 }
 
-
 // ==== aboutMe start (關於我們) ====
-.aboutMe{
+.aboutMe {
     padding: 20px;
     min-height: 100%;
     color: #fff;
     background: linear-gradient(180deg, #021020, #0b2d52 150px);
-    .title{
+    .title {
         padding-bottom: 20px;
         font-size: 1.4rem;
         letter-spacing: 1px;
-        font-weight: bold;   
-        text-align: center;    
+        font-weight: bold;
+        text-align: center;
     }
-    .fullBanner{
+    .fullBanner {
         box-shadow: 0px 0px 4px #000;
     }
-    .txt{
+    .txt {
         padding: 20px 0;
         line-height: 1.8rem;
     }
+}
+
+// ==== annBox start (站內公告) ====
+.annBox {
+    padding: 20px;
+    min-height: 100%;
+    color: #fff;
+    background: linear-gradient(180deg, #021020, #0b2d52 150px);
+
+    .title {
+        padding-bottom: 20px;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    li {
+        &.on {
+            .icon {
+                transform: rotate(0deg);
+            }
+            .listCnt {
+                display: block;
+            }
+        }
+    }
+    li + li {
+        margin-top: 15px;
+    }
+
+    .listTitle {
+        height: 45px;
+        padding: 0 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #a1a1a1;
+        box-shadow: -1px 1px 2px #898989 inset ,1px 1px 4px #000;
+        background: linear-gradient(0deg, #111111, #5c5c5c);
+        &.on {
+            color: #fff;
+            box-shadow: -1px 1px 2px rgb(218, 218, 218) inset,1px 1px 24px #000;
+            background: linear-gradient(0deg, #4f4f4f, #a5a5a5);
+        }
+
+        .main {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .time {
+            padding-top: 3px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .txt {
+            @include txtChip(1);
+            margin-right: 20px;
+        }
+        .icon {
+            width: 22px;
+            height: 45px;
+            line-height: 45px;
+            flex-shrink: 0;
+            transform: rotate(-90deg);
+        }
+    }
+
+    .listCnt {
+        display: none;
+        margin-top: 8px;
+        padding: 0 10px 40px;
+        background-color: #313131;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.75) inset,1px 1px 4px #000;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        color: #ddd;
+        font-size: 1rem;
+        transform-origin: top center;
+        .top {
+            padding: 20px 0;
+            font-weight: bold;
+            border-bottom: 1px solid #a5a5a5;
+            li {
+                display: flex;
+                align-items: flex-end;
+            }
+            li + li {
+                margin-top: 8px;
+            }
+
+            span {
+                padding-right: 10px;
+                flex-shrink: 0;
+                position: relative;
+                &::after {
+                    content: "：";
+                }
+            }
+            p {
+                @include txtChip(1);
+            }
+        }
+        .bottom {
+            padding: 20px 0;
+            line-height: 24px;
+        }
+    }
+}
+
+// ==== suggestBox start (意見反饋) ====
+.suggestBox{
+    padding: 20px;
+    color: #fff;
+    background: linear-gradient(180deg, #021020, #0b2d52 150px);
+    display: flex;
+    flex-direction: column;
+    .title {
+        padding-bottom: 20px;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .suggestBody{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .suggestSel{
+        height: 45px;
+        padding: 0 10px;
+        border-radius: 5px;
+        box-shadow: -1px 1px 2px #a0a0a0 inset;
+        background: linear-gradient(0deg, #2f2f2f, #4f4f4f);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 1px 1px 4px #000;
+        p{
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            @include txtChip(1);
+            color: #CECECE;
+        }
+        .icon {
+            width: 22px;
+            height: 45px;
+            margin-left: 20px;
+            line-height: 45px;
+            flex-shrink: 0; 
+        }
+    }
+
+    .suggestMsg{
+        width: 100%;
+        height: 250px;
+        padding: 0 15px 15px;
+        margin: 10px 0 25px;
+        background-color: #444;
+        border-radius: 5px;
+        box-shadow: 1px 1px 4px #000;
+        display: flex;
+        flex-direction: column;
+        .slogan{
+            padding: 10px 0;
+            color:  #7f8188;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+        textarea{
+            width: 100%;
+            height: 100%;
+            @include fullNone;
+            padding: 10px;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 22px;
+            resize: none;
+            border-radius: 5px;
+            background-color: #2C2D2F;
+            box-shadow: 0 2px 4px #000 inset;
+        }
+       
+    }
+
+    .btnBox{
+        display: flex;
+        @include rwd(500){
+            flex-direction: column;
+        }
+        .btn{
+            flex: 1;
+            height: 40px;
+            line-height: 40px;
+        }
+        .btn+.btn{
+            margin-left: 8px;
+            @include rwd(500){
+                margin-left: 0px;
+                margin-top: 8px;
+            }
+        }
+    }
+    
 }

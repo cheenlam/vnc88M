@@ -1,0 +1,107 @@
+<div id="page">
+    <!-- ==== suggestBox start (意見反饋) ==== -->
+    <div class="suggestBox" ref="suggestBox">
+        <div class="title" ref="title">意見反饋</div>
+        <div class="suggestBody" ref="suggestBody" >
+            <div class="suggestSel" @click="suggest.switch = true">
+                <p>{{suggest.txt}}</p>
+                <div class="icon">
+                    <img src="images/icon/arrow_B.png">
+                </div>
+            </div>
+            <form @submit.prevent="ckSuggest">
+                <div class="suggestMsg">
+                    <div class="slogan">問題描述/其他建議</div>
+                    <textarea placeholder="Hãy điền 10 từ trở lên để thuận tiện cung cấp chi tiết giúp đỡ,hãy điền vào phương thức liên lạc" minlength="10"  v-model="msg" required></textarea>
+                </div>
+                <div class="btnBox">
+                    <div class="btn_linear_c3 btn">
+                        <button class="btn_cnt">送出</button>
+                    </div>
+                    <div class="btn_linear_c2 btn" @click="sancel()">
+                        <div class="btn_cnt">取消</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="selList" :class="{'on':suggest.switch}">
+            <div class="listCnt">
+                <div class="title">主旨類型</div>
+                <div class="list">
+                    <ul>
+                        <template v-for="(item,index) in suggest.list">
+                            <li @click="reSel(index),suggest.switch = false">
+                                <label>
+                                    <span>{{item}}</span>
+                                    <input type="radio" 
+                                    name="suggest" 
+                                    v-model="suggest.checked" 
+                                    :value="index">
+                                </label> 
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                suggest: {
+                    switch: false,
+                    checked: 0,
+                    list: suggestList,
+                    txt: '',
+                },
+                msg:''
+            };
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.$refs.suggestBox.style.minHeight = `${cntH}px`
+            },
+            reSel(data) {
+                this.suggest.txt = this.suggest.list[data];
+            },
+            sancel(){
+                this.msg = '';
+                this.suggest.checked = 0;
+                this.reSel(0);
+            },
+            ckSuggest(){
+                let session = JSON.parse(sessionStorage.getItem('session'));
+                let account = {};
+                let self = this;
+                account.token = String(session.token);
+                account.message = String(`[${this.suggest.txt}]${this.msg}`);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("post", "https://www.vnc8888.com/api/feedback");
+                xhr.setRequestHeader("Content-type", "application/json");
+                let data = JSON.stringify(account);
+                xhr.send(data);
+                xhr.onload = function() {
+                    let response = xhr.status;
+                    console.log(response)
+                    switch (response) {
+                        case 200:
+                            console.log('200')
+                            break;
+                    }
+                }
+
+            }
+        },
+        mounted() {
+            this.setH();
+            this.reSel(0);
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
+</script>

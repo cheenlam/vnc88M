@@ -58,7 +58,7 @@
 
         <!-- newsSel start -->
         <div class="newsSel">
-            <div class="selList" ref="selList">
+            <div class="newsList" ref="newsList">
                 <ul>
                     <template v-for="(item,index) in newsSel.list">
                     <li v-if="item.switch" :data-name="item.data" @click="chSel(item)">
@@ -166,7 +166,9 @@
 
     <!-- ===== 基本會員資料(登錄時顯示) ===== -->
     <div class="onSignin" ref="onSignin" v-show="mbrMsg.onLogin">
-        <div class="name"><p>{{mbrMsg.nickname}}</p></div>
+        <div class="name">
+            <p>{{mbrMsg.nickname}}</p>
+        </div>
         <div class="points">
             <div class="icon"></div>
             <p>{{mbrMsg.points}}</p>
@@ -394,15 +396,15 @@
             },
             // ==== 新聞選擇 及 more提示 ====
             scrollR() {
-                let boxW = this.$refs.selList.clientWidth;
-                let now = this.$refs.selList.scrollLeft
-                let list = document.querySelectorAll('.selList li');
+                let boxW = this.$refs.newsList.clientWidth;
+                let now = this.$refs.newsList.scrollLeft
+                let list = document.querySelectorAll('.newsList li');
                 let count = 0;
                 list.forEach(function(item) {
                     count += item.offsetWidth;
                 })
 
-                this.$refs.selList.scrollLeft = count;
+                this.$refs.newsList.scrollLeft = count;
             },
 
             chSel(item) {
@@ -411,18 +413,18 @@
             },
             selNow() {
                 let array = [];
-                let list = document.querySelectorAll('.selList li');
+                let list = document.querySelectorAll('.newsList li');
                 list.forEach(function(item) {
                     array.push(item.getAttribute('data-name'));
                 });
-                $('.selList li').removeClass('on');
-                $(`.selList li:eq(${array.indexOf(this.newsSel.now)})`).addClass('on');
+                $('.newsList li').removeClass('on');
+                $(`.newsList li:eq(${array.indexOf(this.newsSel.now)})`).addClass('on');
                 this.chNewList();
             },
             showMore() {
-                let boxW = this.$refs.selList.clientWidth;
-                let now = this.$refs.selList.scrollLeft
-                let list = document.querySelectorAll('.selList li');
+                let boxW = this.$refs.newsList.clientWidth;
+                let now = this.$refs.newsList.scrollLeft
+                let list = document.querySelectorAll('.newsList li');
                 let count = 0;
                 list.forEach(function(item) {
                     count += item.offsetWidth;
@@ -465,7 +467,7 @@
             this.setSignin()
 
             window.addEventListener('resize', this.winResize);
-            this.$refs.selList.addEventListener('scroll', this.showMore);
+            this.$refs.newsList.addEventListener('scroll', this.showMore);
 
             let hdH = indexVue.$refs.header.offsetHeight;
             document.querySelector('.newsSel').style.top = `${hdH}px`;

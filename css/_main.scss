@@ -74,6 +74,7 @@ img {
         }
         .menuBer {
             width: 35px;
+            cursor: pointer;
         }
     }
 }
@@ -127,7 +128,7 @@ img {
 
 // ===== content start =====
 .content {
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 121px);
     color: #fff;
 }
 
@@ -138,7 +139,7 @@ img {
     position: sticky;
     border-top: 1px solid rgba(255, 255, 255, 0.4);
     bottom: 0;
-    z-index: 5;
+    z-index: 15;
     overflow: hidden;
     ul {
         display: flex;
@@ -186,6 +187,10 @@ img {
     justify-content: flex-end;
     &.on {
         transform: translateX(0%);
+        .close{
+            background-color: #102d4d8c;
+            transition: .2s .2s;
+        }
     }
     .close{
         width: 100%;
@@ -193,7 +198,7 @@ img {
         position: absolute;
         @include pos(tl,0);
         z-index: -1;
-        background-color: #102d4d8c;
+        
     }
     .sideBody {
         width: 230px;
@@ -250,9 +255,12 @@ img {
             position: absolute;
             @include pos(lb, 0);
         }
+        li{
+            cursor: pointer;
+        }
         a {
             padding: 15px 0;
-            display: block;
+            display: block; 
         }
     }
     .btnBox {
@@ -464,62 +472,19 @@ img {
             }
         }
 
-        .itemSelList {
-            width: 100%;
-            height: 100vh;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.9);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 20;
-            transform: scale(0);
-            transition: transform 0.3s;
-            &.on {
-                transform: scale(1);
-            }
-            .listCnt {
-                max-height: 100%;
-                overflow: scroll;
-                border-radius: 10px;
-                background-color: #fff;
+        .selList {
+            .title{
                 font-size: 1.2rem;
-                font-weight: bold;
-                color: #555;
-            }
-            .title {
-                height: 55px;
-                line-height: 55px;
-                padding: 0 10px;
-                margin-bottom: 0;
-                text-align: center;
-                font-size: 1.2rem;
-                border-bottom: 1px solid #999;
-                background-color: #005cc8;
-                color: #fff;
-                &::before {
+                &::before{
                     display: none;
                 }
             }
-            li {
-                padding: 15px 20px;
-            }
-            li + li {
-                border-top: 1px solid #999;
-            }
-            label {
-                display: flex;
-                justify-content: space-between;
-            }
             span {
+                color: #555;
                 font-size: 1.2rem;
                 &::after {
                     display: none;
                 }
-            }
-            input {
-                width: 20px;
-                height: 20px;
             }
         }
 

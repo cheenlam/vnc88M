@@ -347,3 +347,6 @@ let aboutList = [
     {img:'images/icon/my_member.png',title:'個人資料'},
 ]
 
+// 意見反饋 - 選擇
+let suggestList = ['我要留言','我要建議','我要投訴']
+
