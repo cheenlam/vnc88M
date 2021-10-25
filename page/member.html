@@ -25,7 +25,7 @@
         <div class="menu">
             <ul>
                 <template v-for="(item,index) in aboutList">
-                    <li>
+                    <li @click="listTool(item.key)">
                         <div class="icon">
                             <img :src="item.img">
                         </div>
@@ -59,23 +59,63 @@
             },
             setH() {
                 let fh = indexVue.$refs.ft.clientHeight;
-                let wH = document.body.clientHeight;
-
-                console.log(fh)
-                console.log(wH)
-                this.$refs.mbrBox.style.height = `${wH -fh}px`
+                this.$refs.mbrBox.style.paddingBottom = `${fh + 40}px`
             },
             signInMbr() {
                 indexVue.dialog.main = true;
                 indexVue.dialog.signIn = true;
                 indexVue.verify("mainVerify");
-
             },
             regdMbr() {
                 indexVue.dialog.main = true;
                 indexVue.dialog.regd = true;
                 indexVue.verify("regdVerify");
-            }
+            },
+            // ==== 列表功能 ====
+            listTool(data) {
+                switch (data) {
+                    case 'level':
+                        break;
+                    case 'love':
+                        break;
+                    case 'record':
+                        break;
+                    case 'app':
+                        this.shareApp();
+                        break;
+                    case 'suggest':
+                        indexVue.suggest();
+                        break;
+                    case 'msg':
+                        break;
+                }
+            },
+            // ==== 分享APP ====
+            shareApp() {
+                const shareData = {
+                    url: 'https://www.vnc8888.com/', // 要分享的 URL
+                    title: "VNC88", // 要分享的標題
+                    text: "VNC88" // 要分享的文字內容
+                };
+
+                try {
+                    // 使用 Web Share API
+                    // await navigator.share(shareData);
+                    navigator.share(shareData);
+                    result.textContent = "感謝您的的分享";
+                } catch (err) {
+                    // 使用者拒絕分享或發生錯誤
+                    const {
+                        name,
+                        message
+                    } = err;
+                    if (name === "AbortError") {
+                        result.textContent = "您已取消分享此訊息";
+                    } else {
+                        result.textContent = err;
+                    }
+                }
+            },
         },
         mounted() {
             this.setH();

@@ -339,12 +339,12 @@ let forumList = {
 
 // 我的 - 列表
 let aboutList = [
-    {img:'images/icon/my_level.png',title:'我的等級'},
-    {img:'images/icon/my_love.png',title:'我的最愛'},
-    {img:'images/icon/my_record.png',title:'帳戶紀錄'},
-    {img:'images/icon/my_share.png',title:'分享APP'},
-    {img:'images/icon/my_opinion.png',title:'意見反饋'},
-    {img:'images/icon/my_member.png',title:'個人資料'},
+    {img:'images/icon/my_level.png',title:'我的等級',key:'level'},
+    {img:'images/icon/my_love.png',title:'我的最愛',key:'love'},
+    {img:'images/icon/my_record.png',title:'帳戶紀錄',key:'record'},
+    {img:'images/icon/my_share.png',title:'分享APP',key:'app'},
+    {img:'images/icon/my_opinion.png',title:'意見反饋',key:'suggest'},
+    {img:'images/icon/my_member.png',title:'個人資料',key:'msg'},
 ]
 
 // 意見反饋 - 選擇
