@@ -1,3 +1,5 @@
+<title>VNC88M | 廣告</title>
+
 <div id="page">
     <!-- ==== annBox start (站內公告) ==== -->
     <div class="annBox" ref="annBox">
@@ -116,6 +118,14 @@
             this.setH();
             this.getData();
             window.addEventListener('resize', this.setH);
+
+            // google分析
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>

@@ -1,3 +1,5 @@
+<title>VNC88M | 遊戲</title>
+
 <div id="page">
     <!-- ==== gameBox start (遊戲) ==== -->
     <div class="gameBox" ref="gameBox">
@@ -31,13 +33,15 @@
                         <span>進入遊戲</span>
                     </div>
                 </li>
-            </template>   
+            </template>
         </div>
     </div>
 
     <!-- ===== 基本會員資料(登錄時顯示) ===== -->
     <div class="onSignin" ref="onSignin" v-show="mbrMsg.onLogin">
-        <div class="name"><p>{{mbrMsg.nickname}}</p></div>
+        <div class="name">
+            <p>{{mbrMsg.nickname}}</p>
+        </div>
         <div class="points">
             <div class="icon"></div>
             <p>{{mbrMsg.points}}</p>
@@ -49,7 +53,7 @@
     Vue.createApp({
         data() {
             return {
-                gameList:gameList,
+                gameList: gameList,
 
                 // ==== 會員基本資料 ====
                 mbrMsg: {
@@ -73,6 +77,16 @@
             this.setH();
             this.setSignin()
             window.addEventListener('resize', this.setH);
+
+
+            // google分析
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>

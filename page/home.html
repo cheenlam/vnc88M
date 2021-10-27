@@ -1,3 +1,5 @@
+<title>VNC88M | 首頁</title>
+
 <div id="page">
     <!-- ==== homeBox start (首頁) ==== -->
     <div class="homeBox">
@@ -471,6 +473,15 @@
 
             let hdH = indexVue.$refs.header.offsetHeight;
             document.querySelector('.newsSel').style.top = `${hdH}px`;
+
+
+            // google分析
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>

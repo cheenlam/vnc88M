@@ -1,3 +1,5 @@
+<title>VNC88M | 我的</title>
+
 <div id="page">
     <!-- ==== mbrBox start (我的) ==== -->
     <div class="mbrBox" ref="mbrBox">
@@ -103,23 +105,10 @@
                     // 使用 Web Share API
                     // await navigator.share(shareData);
                     navigator.share(shareData);
-                    result.textContent = "感謝您的的分享";
-                } catch (err) {
-                    // 使用者拒絕分享或發生錯誤
-                    const {
-                        name,
-                        message
-                    } = err;
-                    if (name === "AbortError") {
-                        result.textContent = "您已取消分享此訊息";
-                    } else {
-                        result.textContent = err;
-                    }
-                }
+                }catch{}
             },
             // ==== 跳轉個人資料頁 ====
             goMbr() {
-
                 let session = sessionStorage.getItem('session');
                 if (session == null) {
                     indexVue.dialog.main = true;
@@ -133,6 +122,15 @@
         mounted() {
             this.setH();
             window.addEventListener('resize', this.setH);
+
+
+            // google分析
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>
