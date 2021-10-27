@@ -1,3 +1,5 @@
+<title>VNC88M | 廣告</title>
+
 <div id="page">
     <!-- ==== promoteBox start (廣告) ==== -->
     <div class="promoteBox">
@@ -60,6 +62,14 @@
         },
         mounted() {
             this.getData();
+
+            // google分析
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>

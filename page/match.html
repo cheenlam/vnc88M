@@ -1,3 +1,5 @@
+<title>VNC88M | 賽事</title>
+
 <div id="page">
     <!-- ==== matchBox start (賽事) ==== -->
     <div class="matchBox" ref="matchBox">
@@ -23,6 +25,15 @@
         mounted() {
             this.setH();
             window.addEventListener('resize', this.setH);
+
+
+             // google分析
+             window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-207427072-1');
         },
     }).mount("#page");
 </script>
