@@ -200,7 +200,6 @@ img {
         position: absolute;
         @include pos(tl,0);
         z-index: -1;
-        
     }
     .sideBody {
         width: 230px;
@@ -369,7 +368,7 @@ img {
             padding-bottom: 15px;
             position: relative;
             .itemIpt {
-                height: 35px;
+                height: 40px;
                 padding: 0 5px;
                 display: flex;
                 align-items: center;
@@ -421,8 +420,8 @@ img {
         }
 
         .QBtn {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: flex-end;

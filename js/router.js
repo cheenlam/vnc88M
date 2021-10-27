@@ -9,7 +9,7 @@ Router.prototype.route = function(path, callback) {
 };
 Router.prototype.refresh = function() {
     // 路由清單
-    let routerList = ['', 'home', 'match', 'promote', 'game', 'forum', 'member','aboutMe','ann','suggest'];
+    let routerList = ['', 'home', 'match', 'promote', 'game', 'forum', 'member','aboutMe','ann','suggest','mbrMsg'];
 
     for (let i = 0; i < 99; i++) {
         routerList.push(`latest/news?list=${i}`)
@@ -80,6 +80,10 @@ Router.route('/ann', function() {
 });
 Router.route('/suggest', function() {
     mainInclude('page/suggest.html');
+    $('#ftMenu li').removeClass('on')
+});
+Router.route('/mbrMsg', function() {
+    mainInclude('page/mbrMsg.html');
     $('#ftMenu li').removeClass('on')
 });
 

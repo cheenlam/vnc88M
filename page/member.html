@@ -86,7 +86,8 @@
                     case 'suggest':
                         indexVue.suggest();
                         break;
-                    case 'msg':
+                    case 'mbrMsg':
+                        this.goMbr();
                         break;
                 }
             },
@@ -116,6 +117,18 @@
                     }
                 }
             },
+            // ==== 跳轉個人資料頁 ====
+            goMbr() {
+
+                let session = sessionStorage.getItem('session');
+                if (session == null) {
+                    indexVue.dialog.main = true;
+                    indexVue.dialog.signIn = true;
+                    indexVue.verify("mainVerify");
+                } else {
+                    location.href = "#/mbrMsg"
+                }
+            }
         },
         mounted() {
             this.setH();

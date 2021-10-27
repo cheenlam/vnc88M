@@ -1,0 +1,192 @@
+<div id="page">
+    <!-- ==== mbrMsg start (個人資料/修改密碼) ==== -->
+    <div class="mbrMsg" ref="mbrMsg">
+        <div class="mbrSel">
+            <ul>
+                <template v-for="(item,index) in sel.list">
+                    <li :class="{'on':index==sel.num}" @click="sel.num = index">{{item.title}}</li>
+                </template>
+            </ul>
+        </div>
+
+        <!-- 個人資料 -->
+        <div class="mbrInfor" v-if="sel.num == 0">
+            <div class="badge">
+                <img src="images/levelBadge/level_01.png">
+            </div>
+            <form @submit.prevent="chInfor()">
+                <div class="iptBox">
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>帳號</span>
+                                <div>{{mbrData.username}}</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>暱稱</span>
+                                <input type="text"           
+                                placeholder="請輸入暱稱"
+                                v-model = "mbrData.nickname"
+                                required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>E-mail</span>
+                                <input type="email" 
+                                placeholder="請輸入信箱" 
+                                v-model= "mbrData.email"
+                                required
+                               >
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>手機</span>
+                                <input type="tel" 
+                                v-model ="mbrData.phone"
+                                placeholder="請輸入手機"
+                                required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>Facebook</span>
+                                <input type="text" v-model="mbrData.fb">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>Telegram</span>
+                                <input type="text" v-model="mbrData.tg">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>Zalo</span>
+                                <input type="text" v-model="mbrData.zalo">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btnBox">
+                    <div class="btn_linear_c3 btn">
+                        <button class="btn_cnt">送出</button>
+                    </div>
+                    <div class="btn_linear_c2 btn">
+                        <div class="btn_cnt">取消</div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- 修改密碼 -->
+        <div class="chPwd" v-if="sel.num == 1">修改密碼</div>
+    </div>
+
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                sel: {
+                    list: mbrSel,
+                    num: 0,
+                },
+                mbrData: {
+                    username: '',
+                    nickname: '',
+                    email: '',
+                    phone: '',
+                    gender: '',
+                    birthday: '',
+                    fb: '',
+                    tg: '',
+                    zalo: '',
+                }
+            };
+        },
+        methods: {
+            setH() {
+                let cntH = indexVue.$refs.content.clientHeight;
+                this.$refs.mbrMsg.style.minHeight = `${cntH}px`
+            },
+            getMbr() {
+                let tk = JSON.parse(sessionStorage.getItem('session')).token;
+                let self = this;
+                $.ajax({
+                    type: "GET",
+                    url: "https://www.vnc8888.com/api/member",
+                    data: {
+                        token: tk
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        let mbr = JSON.parse(data)
+                        self.mbrData.username = mbr.username;
+                        self.mbrData.nickname = mbr.nickname;
+                        self.mbrData.email = mbr.email;
+                        self.mbrData.phone = mbr.phone;
+                        self.mbrData.gender = mbr.gender;
+                        self.mbrData.birthday = mbr.birthday;
+                        self.mbrData.fb = mbr.fb;
+                        self.mbrData.tg = mbr.tg;
+                        self.mbrData.zalo = mbr.zalo;
+                    }
+                })
+            },
+            chInfor() {
+                let tk = JSON.parse(sessionStorage.getItem('session')).token;
+                let self = this;
+                let mbrMsg = {};
+                mbrMsg.token = String(tk);
+                mbrMsg.nickname = String(self.mbrData.nickname);
+                mbrMsg.email = String(self.mbrData.email);
+                mbrMsg.phone = String(self.mbrData.phone);
+                mbrMsg.gender = String(self.mbrData.gender);
+                mbrMsg.birthday = String(self.mbrData.birthday);
+                mbrMsg.birthday = '2021/05/31'; 
+                mbrMsg.fb = String(self.mbrData.fb);
+                mbrMsg.tg = String(self.mbrData.tg);
+                mbrMsg.zalo = String(self.mbrData.zalo);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("put", "https://www.vnc8888.com/api/member");
+                xhr.setRequestHeader("Content-type", "application/json");
+                let data = JSON.stringify(mbrMsg);
+                xhr.send(data);
+                xhr.onload = function() {
+                    console.log(xhr)
+                }
+            },
+
+        },
+        mounted() {
+            this.setH();
+            this.getMbr();
+            window.addEventListener('resize', this.setH);
+        },
+    }).mount("#page");
