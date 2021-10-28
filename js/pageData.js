@@ -3,44 +3,44 @@ let ftMenu = [{
         data: 'match',
         href: "#/match",
         img: "images/icon/match.png",
-        title: "賽事",
+        title: "Trận đấu",
         switch: true
     },
     {
         data: 'promote',
         href: "#/promote",
         img: "images/icon/promote.png",
-        title: "廣告",
-        switch: true
+        title: "Quảng cáo",
+        switch: false
     },
     {
         data: 'game',
         href: "#/game",
         img: "images/icon/game.png",
         title: "play now",
-        switch: true
+        switch: false
     },
     {
         data: 'forum',
         href: "#/forum",
         img: "images/icon/forum.png",
-        title: "討論區",
+        title: "Thảo luận",
         switch: true
     },
     {
         data: 'member',
         href: "#/member",
         img: "images/icon/about.png",
-        title: "我的",
+        title: "Tài khoản",
         switch: true
     },
 ]
 
 // 主架構 - 忘記密碼選擇
 let forgetList = [
-    '電子信箱','手機'
+    'Thư điện tử',
+    'Số di động',
 ]
-
 
 // home - 彩票公司推薦
 let lottoryLink = {
@@ -234,12 +234,12 @@ let lottoryLink = {
 
 // home - 新聞選擇menu
 let newsMenu = [
-    { title: '最新消息', data: 'latest', switch: true },
-    { title: '首頁', data: 'home', switch: true },
-    { title: '投注建議', data: 'lottery', switch: true },
-    { title: '新聞', data: 'news', switch: true },
-    { title: '足球轉播', data: 'broadcast', switch: true },
-    { title: '資源', data: 'resource', switch: true },
+    { title: 'Tin mới nhất', data: 'latest', switch: true },
+    { title: 'TRANG CHỦ', data: 'home', switch: true },
+    { title: 'Đề xuất cá cược', data: 'lottery', switch: true },
+    { title: 'Tin tức', data: 'news', switch: true },
+    { title: 'Video đá bóng', data: 'broadcast', switch: false },
+    { title: 'Thông tin', data: 'resource', switch: true },
 ]
 
 // game - 遊戲清單
@@ -261,14 +261,14 @@ let obviousList = [
 
 // 討論區 - 篩選清單
 let filterList = {
-    match: ['英甲', '英超', '世界盃', '歐洲杯', '法甲', '其他賽事'],
-    sort: ['全部', '分析', '感謝', 'Live', '亮單', '新聞'],
-    array: ['最新回覆', '最新文章'],
+    match: ['Football League One', 'Premier League', 'World Cup', 'C1', 'Ligue 1', 'Các giải bóng đá khác'],
+    sort: ['Toàn bộ', 'Phân tích', 'Cảm ơn', 'Trực tiếp', 'List đặt cược', 'Tin tức'],
+    array: ['Trả lời mới', 'Bài viết mới'],
 }
 
 // 討論區 - 列表
 let forumList = {
-    main:['主題','作者'],
+    main:['Chủ đề','Tác giả'],
     list:[
         {
             tag: '英超',
@@ -339,19 +339,21 @@ let forumList = {
 
 // 我的 - 列表
 let aboutList = [
-    {img:'images/icon/my_level.png',title:'我的等級',key:'level'},
-    {img:'images/icon/my_love.png',title:'我的最愛',key:'love'},
-    {img:'images/icon/my_record.png',title:'帳戶紀錄',key:'record'},
-    {img:'images/icon/my_share.png',title:'分享APP',key:'app'},
-    {img:'images/icon/my_opinion.png',title:'意見反饋',key:'suggest'},
-    {img:'images/icon/my_member.png',title:'個人資料',key:'mbrMsg'},
+    {img:'images/icon/my_level.png',title:'Cấp bậc',key:'level'},
+    {img:'images/icon/my_love.png',title:'Sở thích',key:'love'},
+    {img:'images/icon/my_record.png',title:'Ghi chép',key:'record'},
+    {img:'images/icon/my_share.png',title:'Chia sẻ APP',key:'app'},
+    {img:'images/icon/my_opinion.png',title:'Ý kiến',key:'suggest'},
+    {img:'images/icon/my_member.png',title:'ông tin tài khoản',key:'mbrMsg'},
 ]
 
 // 意見反饋 - 選擇
-let suggestList = ['我要留言','我要建議','我要投訴']
+let suggestList = ['Tin nhắn','Kiến nghị','Phản ánh']
 
 // 個人資料 - 選擇
 let mbrSel = [
-    {title:'個人資料', switch: true},
-    {title:'修改密碼', switch: true}
+    {title:'Thông tin tài khoản', switch: true},
+    {title:'Cập nhật mật khẩu', switch: true}
 ]
+
+

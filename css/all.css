@@ -913,6 +913,7 @@ img {
 .sideList .mbrMsg {
   padding: 15px 0;
   position: relative;
+  background: transparent;
 }
 
 .sideList .mbrMsg::before {
@@ -992,7 +993,6 @@ img {
   padding: 30px 20px;
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
-  position: absolute;
   z-index: 50;
   top: 0;
   left: 0;
@@ -2432,9 +2432,13 @@ img {
   border-right: none;
 }
 
+.mbrBox .menu li span {
+  text-align: center;
+}
+
 .mbrBox .menu .icon {
-  width: 35px;
-  margin-bottom: 3px;
+  width: 40px;
+  margin-bottom: 5px;
 }
 
 .aboutMe {
@@ -2773,7 +2777,7 @@ img {
   }
 }
 
-.mbrMsg {
+.personal {
   padding: 20px;
   color: #fff;
   background: linear-gradient(180deg, #021020, #0b2d52 150px);
@@ -2786,18 +2790,18 @@ img {
           flex-direction: column;
 }
 
-.mbrMsg .mbrSel {
+.personal .mbrSel {
   font-size: 0.95rem;
   margin-bottom: 25px;
 }
 
-.mbrMsg .mbrSel ul {
+.personal .mbrSel ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.mbrMsg .mbrSel li {
+.personal .mbrSel li {
   padding: 0 5px 8px;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -2806,22 +2810,22 @@ img {
   position: relative;
 }
 
-.mbrMsg .mbrSel li.on {
+.personal .mbrSel li.on {
   color: #f7a807;
 }
 
-.mbrMsg .mbrSel li.on::after {
+.personal .mbrSel li.on::after {
   width: calc(100% - 20px);
   background-color: #f7a807;
 }
 
-.mbrMsg .mbrSel li::after, .mbrMsg .mbrSel li::before {
+.personal .mbrSel li::after, .personal .mbrSel li::before {
   content: "";
   height: 3px;
   position: absolute;
 }
 
-.mbrMsg .mbrSel li::before {
+.personal .mbrSel li::before {
   width: calc(100% - 20px);
   margin: auto;
   background-color: #fff;
@@ -2830,7 +2834,7 @@ img {
   right: 0;
 }
 
-.mbrMsg .mbrSel li::after {
+.personal .mbrSel li::after {
   width: 0;
   position: absolute;
   bottom: 0;
@@ -2839,16 +2843,16 @@ img {
   transition: 0.3s;
 }
 
-.mbrMsg .iptBox {
+.personal .iptBox {
   padding: 20px 15px;
 }
 
-.mbrMsg .item {
+.personal .item {
   padding-bottom: 15px;
   position: relative;
 }
 
-.mbrMsg .item .itemIpt {
+.personal .item .itemIpt {
   height: 40px;
   padding: 0 10px;
   display: -webkit-box;
@@ -2863,7 +2867,7 @@ img {
   border-radius: 3px;
 }
 
-.mbrMsg label {
+.personal label {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -2874,7 +2878,7 @@ img {
           align-items: center;
 }
 
-.mbrMsg label span {
+.personal label span {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2886,16 +2890,16 @@ img {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   font-size: 0.95rem;
 }
 
-.mbrMsg label span::after {
+.personal label span::after {
   content: ":";
   padding: 0 3px;
 }
 
-.mbrMsg label input {
+.personal label input {
   width: 100%;
   height: 100%;
   background: transparent;
@@ -2905,19 +2909,19 @@ img {
   color: #fff;
 }
 
-.mbrMsg label input:-webkit-autofill, .mbrMsg label input:-webkit-autofill:hover, .mbrMsg label input:-webkit-autofill:focus {
+.personal label input:-webkit-autofill, .personal label input:-webkit-autofill:hover, .personal label input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px #100f1f inset;
           box-shadow: 0 0 0 30px #100f1f inset;
   -webkit-text-fill-color: #d7e4f9;
 }
 
-.mbrMsg .btnBox {
+.personal .btnBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.mbrMsg .btnBox .btn {
+.personal .btnBox .btn {
   height: 40px;
   line-height: 40px;
   -webkit-box-flex: 1;
@@ -2925,13 +2929,66 @@ img {
           flex: 1;
 }
 
-.mbrMsg .btnBox .btn + .btn {
+.personal .btnBox .btn + .btn {
   margin-left: 8px;
 }
 
-.mbrMsg .mbrInfor .badge {
+.personal .mbrInfor .badge {
   width: 100px;
   margin: auto;
+}
+
+.minDialog {
+  width: calc(100% - 20px);
+  padding: 15px 10px;
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  display: none;
+}
+
+.minDialog.on {
+  display: block;
+  -webkit-animation: minDialog 1.5s forwards;
+          animation: minDialog 1.5s forwards;
+}
+
+@-webkit-keyframes minDialog {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(25px);
+            transform: translateY(25px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
+}
+
+@keyframes minDialog {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(25px);
+            transform: translateY(25px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
 }
 
 .newsCnt {

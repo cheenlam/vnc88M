@@ -1,7 +1,7 @@
 <div id="page">
-    <!-- ==== mbrMsg start (個人資料/修改密碼) ==== -->
-    <div class="mbrMsg" ref="mbrMsg">
-        <div class="mbrSel">
+    <!-- ==== personal start (個人資料/修改密碼) ==== -->
+    <div class="personal" ref="personal">
+        <div class="mbrSel" v-if="false">
             <ul>
                 <template v-for="(item,index) in sel.list">
                     <li :class="{'on':index==sel.num}" @click="sel.num = index">{{item.title}}</li>
@@ -19,7 +19,7 @@
                     <div class="item">
                         <div class="itemIpt">
                             <label>
-                                <span>帳號</span>
+                                <span>Tài khoản</span>
                                 <div>{{mbrData.username}}</div>
                             </label>
                         </div>
@@ -28,9 +28,9 @@
                     <div class="item">
                         <div class="itemIpt">
                             <label>
-                                <span>暱稱</span>
+                                <span>Tên Nick</span>
                                 <input type="text"           
-                                placeholder="請輸入暱稱"
+                                placeholder="Hãy nhập tên nick"
                                 v-model = "mbrData.nickname"
                                 required>
                             </label>
@@ -40,9 +40,9 @@
                     <div class="item">
                         <div class="itemIpt">
                             <label>
-                                <span>E-mail</span>
+                                <span>Thư điện tử</span>
                                 <input type="email" 
-                                placeholder="請輸入信箱" 
+                                placeholder="Điền hộp thư điện tử" 
                                 v-model= "mbrData.email"
                                 required
                                >
@@ -53,10 +53,10 @@
                     <div class="item">
                         <div class="itemIpt">
                             <label>
-                                <span>手機</span>
+                                <span>Số di động</span>
                                 <input type="tel" 
                                 v-model ="mbrData.phone"
-                                placeholder="請輸入手機"
+                                placeholder="Điền số điện thoại"
                                 required>
                             </label>
                         </div>
@@ -92,20 +92,20 @@
 
                 <div class="btnBox">
                     <div class="btn_linear_c3 btn">
-                        <button class="btn_cnt">送出</button>
+                        <button class="btn_cnt">Số di động</button>
                     </div>
-                    <div class="btn_linear_c2 btn">
-                        <div class="btn_cnt">取消</div>
+                    <div class="btn_linear_c2 btn" @click="goMbr()">
+                        <div class="btn_cnt">Hủy bỏ</div>
                     </div>
                 </div>
             </form>
-
         </div>
 
         <!-- 修改密碼 -->
         <div class="chPwd" v-if="sel.num == 1">修改密碼</div>
     </div>
 
+    <div class="minDialog" :class="{'on':minDialog}">Sửa đổi thành công</div>
 </div>
 
 <script>
@@ -126,13 +126,14 @@
                     fb: '',
                     tg: '',
                     zalo: '',
-                }
+                },
+                minDialog:false
             };
         },
         methods: {
             setH() {
                 let cntH = indexVue.$refs.content.clientHeight;
-                this.$refs.mbrMsg.style.minHeight = `${cntH}px`
+                this.$refs.personal.style.minHeight = `${cntH}px`
             },
             getMbr() {
                 let tk = JSON.parse(sessionStorage.getItem('session')).token;
@@ -179,9 +180,19 @@
                 let data = JSON.stringify(mbrMsg);
                 xhr.send(data);
                 xhr.onload = function() {
-                    console.log(xhr)
+                    if(xhr.status == 200){
+                        self.minDialog = true;
+                        setTimeout(function(){
+                            self.minDialog = false;    
+                        },1500)
+                    }else{
+                        location.href = "#/member";
+                    }
                 }
             },
+            goMbr(){
+                location.href = "#/member";
+            }
 
         },
         mounted() {

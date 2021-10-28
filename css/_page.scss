@@ -698,10 +698,11 @@
             &:nth-child(3n) {
                 border-right: none;
             }
+            span{text-align: center;}
         }
         .icon {
-            width: 35px;
-            margin-bottom: 3px;
+            width: 40px;
+            margin-bottom: 5px;
         }
     }
 }
@@ -937,8 +938,8 @@
     }
 }
 
-// ====  mbrMsg start (個人資料/修改密碼) ====
-.mbrMsg {
+// ====  personal start (個人資料/修改密碼) ====
+.personal {
     padding: 20px;
     color: #fff;
     background: linear-gradient(180deg, #021020, #0b2d52 150px);
@@ -1013,7 +1014,7 @@
             color: #869bae;
             flex-shrink: 0;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 1px;
             font-size: 0.95rem;
             &::after {
                 content: ":";
@@ -1055,5 +1056,37 @@
             margin: auto;
         }
        
+    }
+}
+
+.minDialog{
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+    margin: auto;
+    position: fixed;
+    @include pos(tlr,50%,0,0);
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 20;
+    display: none;
+    &.on{
+        display: block;
+        animation: minDialog 1.5s forwards;
+    }
+  
+}
+
+@keyframes minDialog {
+    0%{
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-25px);
     }
 }

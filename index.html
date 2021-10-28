@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
@@ -77,31 +77,31 @@
                             <p>{{mbrMsg.nickname}}</p>
                         </li>
                         <li>
-                            <p>我的錢包：{{mbrMsg.points}}</p>
+                            <p>Ví của tôi：{{mbrMsg.points}}</p>
                             <div class="renew">
                             </div>
                         </li>
                     </ul>
 
                     <div class="btn_linear_c5 btn">
-                        <div class="btn_cnt">紀錄查詢</div>
+                        <div class="btn_cnt">Tìm kiếm</div>
                     </div>
                 </div>
 
                 <div class="list" @click="sideList = false">
                     <ul>
-                        <li><a href="#/aboutMe">關於我們</a></li>
-                        <li><a href="#/ann">最新消息</a></li>
-                        <li @click="suggest()"><a>意見反饋</a></li>
+                        <li><a href="#/aboutMe">Liên quan đến chúng tôi</a></li>
+                        <li><a href="#/ann">Thông tin mới nhất</a></li>
+                        <li @click="suggest()"><a>Kiến nghị phản ánh</a></li>
                     </ul>
                 </div>
 
                 <div class="btnBox" @click="sideList = false">
                     <div class="btn_linear_c3 btn" v-if="mbrLogin" @click="toSignOut()">
-                        <div class="btn_cnt">登出</div>
+                        <div class="btn_cnt">Đăng xuất</div>
                     </div>
                     <div class="btn_linear_c2 btn" v-if="!mbrLogin" @click="toSignIn()">
-                        <div class="btn_cnt">登入</div>
+                        <div class="btn_cnt">Đăng nhập</div>
                     </div>
                 </div>
             </div>
@@ -119,8 +119,8 @@
                             <div class="item">
                                 <div class="itemIpt">
                                     <label>
-                                    <span>帳號</span>
-                                    <input type="text" placeholder="請輸入帳號" v-model="regdMbr.account" required>
+                                    <span>Tài khoản</span>
+                                    <input type="text" placeholder="Điền tên tài khoản" v-model="regdMbr.account" required>
                                 </label>
                                 </div>
                                 <p class="errorTxt" v-if="errorCode.reEmail">Email không tồn tại</p>
@@ -129,8 +129,8 @@
                             <div class="item">
                                 <div class="itemIpt">
                                     <label>
-                                        <span>密碼</span>
-                                        <input type="password" placeholder="請輸入密碼" v-model="regdMbr.pwd" autocomplete="on" required>
+                                        <span>Mật khẩu</span>
+                                        <input type="password" placeholder="Nhập mật khẩu" v-model="regdMbr.pwd" autocomplete="on" required>
                                     </label>
                                 </div>
                                 <p class="errorTxt" v-if="false"></p>
@@ -139,8 +139,8 @@
                             <div class="item code">
                                 <div class="itemIpt">
                                     <label>
-                                    <span>驗證碼</span>
-                                    <input type="text" placeholder="Xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}" v-model="regdMbr.code" required>
+                                    <span>xác minh</span>
+                                    <input type="text" placeholder="xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}" v-model="regdMbr.code" required>
                                 </label>
                                     <div class="nbCode" @click="verify('mainVerify')">
                                         <canvas id="regdVerify" @click="verify('regdVerify')"></canvas>
@@ -192,15 +192,15 @@
             <!-- ===== 登入 ===== -->
             <div class="dialogBody" :class="{'on':dialog.signIn}">
                 <div class="close" @click="closeDialog()"></div>
-                <div class="title">登入</div>
+                <div class="title">Đăng nhập</div>
                 <form @submit.prevent="ckSignIn()">
                     <div class="dialogCnt">
                         <div class="iptBox">
                             <div class="item">
                                 <div class="itemIpt">
                                     <label>
-                                    <span>帳號</span>
-                                    <input type="text" placeholder="請輸入帳號" v-model="signInMbr.account" required>
+                                    <span>Tài khoản</span>
+                                    <input type="text" placeholder="Điền tên tài khoản" v-model="signInMbr.account" required>
                                 </label>
                                 </div>
                                 <p class="errorTxt" v-if="errorCode.notEmail">Email không tồn tại</p>
@@ -209,8 +209,8 @@
                             <div class="item">
                                 <div class="itemIpt">
                                     <label>
-                                        <span>密碼</span>
-                                        <input type="password" placeholder="請輸入密碼" v-model="signInMbr.pwd" autocomplete="on" required>
+                                        <span>Mật khẩu</span>
+                                        <input type="password" placeholder="Nhập mật khẩu" v-model="signInMbr.pwd" autocomplete="on" required>
                                     </label>
                                     <div class="QBtn" @click="toForget()">
                                         <div class="btn_linear_c2 btn">
@@ -224,8 +224,8 @@
                             <div class="item code">
                                 <div class="itemIpt">
                                     <label>
-                                    <span>驗證碼</span>
-                                    <input type="text" placeholder="Xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}" v-model="signInMbr.code" required>
+                                    <span>xác minh</span>
+                                    <input type="text" placeholder="xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}" v-model="signInMbr.code" required>
                                 </label>
                                     <div class="nbCode" @click="verify('mainVerify')">
                                         <canvas id='mainVerify'></canvas>
@@ -237,7 +237,7 @@
 
                         <div class="btnBox">
                             <div class="btn_linear_c1 btn">
-                                <button class="btn_cnt">登入</button>
+                                <button class="btn_cnt">Đăng nhập</button>
                             </div>
                         </div>
                     </div>
@@ -253,8 +253,8 @@
                         <div class="item">
                             <div class="itemIpt">
                                 <label>
-                                <span>帳號</span>
-                                <input type="text" placeholder="請輸入帳號"  required>
+                                <span>tài khoản</span>
+                                <input type="text" placeholder="Điền tên tài khoản"  required>
                             </label>
                             </div>
                             <p class="errorTxt" v-if="errorCode.notEmail">Email không tồn tại</p>
@@ -263,8 +263,8 @@
                         <div class="item">
                             <div class="itemIpt">
                                 <label>
-                                    <span>認證方式</span>
-                                    <input type="text" placeholder="請選擇認證方式"  required >
+                                    <span>Xác minh</span>
+                                    <input type="text" placeholder="Xác minh"  required >
                                 </label>
                                 <div class="itemSel" @click="forgetMbr.switch = true">
                                     <p>{{forgetMbr.txt}}</p>
@@ -275,7 +275,7 @@
 
                                 <div class="selList" :class="{'on':forgetMbr.switch}">
                                     <div class="listCnt">
-                                        <div class="title">認證方式</div>
+                                        <div class="title">Xác minh</div>
                                         <div class="list">
                                             <ul>
                                                 <template v-for="(item,index) in forgetMbr.list">
@@ -300,8 +300,8 @@
                         <div class="item code">
                             <div class="itemIpt">
                                 <label>
-                                <span>驗證碼</span>
-                                <input type="text" placeholder="Xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}"  required>
+                                <span>Xác minh</span>
+                                <input type="text" placeholder="Nhập mã xác minh"  minlength="4" maxlength="4" pattern="[0-9]{4,4}"  required>
                             </label>
                                 <div class="nbCode" @click="verify('forgetVerify')">
                                     <canvas id='forgetVerify'></canvas>

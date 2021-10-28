@@ -1,7 +1,7 @@
 <div id="page">
     <!-- ==== annBox start (站內公告) ==== -->
     <div class="annBox" ref="annBox">
-        <div class="title">最新消息</div>
+        <div class="title">Thông tin mới nhất</div>
         <div class="annList">
             <ul>
                 <template v-for="(item,index) in list">
@@ -19,11 +19,11 @@
                             <div class="top">
                                 <ul>
                                     <li>
-                                        <span>時間</span>
+                                        <span>Thời gian</span>
                                         <p class="time" v-html="reTime(item.stime)"><p> 
                                     </li>
                                     <li>
-                                        <span>主旨</span>
+                                        <span>Chủ đề</span>
                                         <p>{{item.title}}</p>
                                     </li>
                                 </ul>
