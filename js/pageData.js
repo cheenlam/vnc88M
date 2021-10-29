@@ -235,7 +235,7 @@ let lottoryLink = {
 // home - 新聞選擇menu
 let newsMenu = [
     { title: 'Tin mới nhất', data: 'latest', switch: true },
-    { title: 'TRANG CHỦ', data: 'home', switch: true },
+    { title: 'TRANG CHỦ', data: 'home', switch: false },
     { title: 'Đề xuất cá cược', data: 'lottery', switch: true },
     { title: 'Tin tức', data: 'news', switch: true },
     { title: 'Video đá bóng', data: 'broadcast', switch: false },
