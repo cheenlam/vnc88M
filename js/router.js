@@ -23,10 +23,10 @@ Router.prototype.refresh = function() {
     //获取到相应的hash值
     let index = routerList.indexOf(location.hash.slice(2))
     if (index == -1) {
-        this.currentUrl = '/home'
-        location.href = "#/home"
+        this.currentUrl = '/match'
+        location.href = "#/match"
     } else {
-        this.currentUrl = location.hash.slice(1) || '/home';
+        this.currentUrl = location.hash.slice(1) || '/match';
     }
     // this.currentUrl = location.hash.slice(1) || '/home'; 
     //如果存在hash值则获取到，否则设置hash值为/
