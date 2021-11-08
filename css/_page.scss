@@ -240,6 +240,32 @@
     }
 }
 
+// ===== floatBtn start =====
+// (浮動按鈕 每日遊戲&註冊抽獎)
+.floatBtn {
+    width: 65px;
+    position: fixed;
+    z-index: 10;
+    @include pos(br, 80px, 10px);
+
+    li + li {
+        margin-top: 15px;
+    }
+    .btnImg {
+        width: 100%;
+        filter: drop-shadow(0 0 4px #b4813b);
+    }
+    .text {
+        width: 100%;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 0px 3px #fe9504, -1px 0px 3px #a36206, 0px -1px 3px #fe9504, 0px 1px 3px #8a5205;
+        transform: translateY(-15px);
+    }
+}
+
 // ==== matchBox start (賽事) ====
 .matchBox {
     background-color: #fff;
@@ -698,7 +724,9 @@
             &:nth-child(3n) {
                 border-right: none;
             }
-            span{text-align: center;}
+            span {
+                text-align: center;
+            }
         }
         .icon {
             width: 40px;
@@ -959,7 +987,7 @@
             &.on {
                 color: #f7a807;
                 &::after {
-                    width: calc(100% - 20px);
+                    width: calc(100% - 10px);
                     background-color: #f7a807;
                 }
             }
@@ -970,7 +998,7 @@
                 position: absolute;
             }
             &::before {
-                width: calc(100% - 20px);
+                width: calc(100% - 10px);
                 margin: auto;
                 background-color: #fff;
                 @include pos(blr, 0);
@@ -978,13 +1006,13 @@
             &::after {
                 width: 0;
                 position: absolute;
-                @include pos(bl, 0, 10px);
+                @include pos(bl, 0, 5px);
                 transition: 0.3s;
             }
         }
     }
 
-    .iptBox{
+    .iptBox {
         padding: 20px 15px;
     }
 
@@ -1037,16 +1065,43 @@
         }
     }
 
-    .btnBox{
+    .radioBox {
+        padding-left: 5px;
+        align-items: center;
+        color: #999;
+
+        input[type="radio"] {
+            display: none;
+            &:checked + .icon {
+                background-image: url(../images/icon/radio_on.png);
+            }
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 3px;
+            background: url(../images/icon/radio_off.png) no-repeat center / cover;
+        }
+    }
+
+    .btnBox {
         display: flex;
-        .btn{
+        .btn {
             height: 40px;
             line-height: 40px;
             flex: 1;
         }
-        .btn+.btn{
+        .btn + .btn {
             margin-left: 8px;
         }
+    }
+
+    .errorTxt {
+        width: 100%;
+        padding: 5px 0 0 5px;
+        color: #f12929;
+        font-size: 0.8rem;
     }
 
     // 個人資料
@@ -1055,38 +1110,36 @@
             width: 100px;
             margin: auto;
         }
-       
     }
 }
 
-.minDialog{
+.minDialog {
     width: calc(100% - 20px);
     padding: 15px 10px;
     margin: auto;
     position: fixed;
-    @include pos(tlr,50%,0,0);
+    @include pos(tlr, 50%, 0, 0);
     text-align: center;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 20;
     display: none;
-    &.on{
+    &.on {
         display: block;
-        animation: minDialog 1.5s forwards;
+        animation: minDialog 1s forwards;
     }
 }
 
 @keyframes minDialog {
-    0%{
+    0% {
         opacity: 0;
         transform: translateY(25px);
     }
-    50%{
+    50% {
         opacity: 1;
     }
-    100%{
+    100% {
         opacity: 0;
         transform: translateY(-25px);
     }
 }
-

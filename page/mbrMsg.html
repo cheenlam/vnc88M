@@ -1,10 +1,10 @@
 <div id="page">
     <!-- ==== personal start (個人資料/修改密碼) ==== -->
     <div class="personal" ref="personal">
-        <div class="mbrSel" v-if="false">
+        <div class="mbrSel">
             <ul>
                 <template v-for="(item,index) in sel.list">
-                    <li :class="{'on':index==sel.num}" @click="sel.num = index">{{item.title}}</li>
+                    <li :class="{'on':index==sel.num}" @click="sel.num = index, reset()">{{item.title}}</li>
                 </template>
             </ul>
         </div>
@@ -65,6 +65,40 @@
                     <div class="item">
                         <div class="itemIpt">
                             <label>
+                                <span>Giới tính</span>
+                                <label class="radioBox">
+                                    <input type="radio" name="gender"
+                                     value="Male" v-model="mbrData.gender">
+                                    <div class="icon"></div>
+                                    <p>Nam</p>
+                                </label>
+                            <label class="radioBox">
+                                    <input type="radio" name="gender" 
+                                    value="Female" v-model="mbrData.gender">
+                                    <div class="icon"></div>
+                                    <p>Nữ</p>
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>Birthday</span>
+                                <input type="text" 
+                                v-model ="mbrData.birthday"
+                                placeholder="YYYY-MM-DD"
+                                id="date-group"
+                                required disabled>
+                            </label>
+                        </div>
+                        <p class="errorTxt" v-if="error.birthday">Nhập Ngày tháng năm sinh</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
                                 <span>Facebook</span>
                                 <input type="text" v-model="mbrData.fb">
                             </label>
@@ -100,9 +134,61 @@
                 </div>
             </form>
         </div>
-
         <!-- 修改密碼 -->
-        <div class="chPwd" v-if="sel.num == 1">修改密碼</div>
+        <div class="chPwd" v-if="sel.num == 1">
+            <form @submit.prevent="ckPwd()">
+                <div class="iptBox">
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>mật khẩu cũ</span>
+                                <input type="password"           
+                                placeholder="Nhập mật khẩu cũ"
+                                v-model= "pwdData.old"
+                                required>
+                            </label>
+                        </div>
+                        <p class="errorTxt" v-if="error.old">Sai mật khẩu cũ</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>mật khẩu mới</span>
+                                <input type="password"           
+                                placeholder="Nhập mật khẩu mới"
+                                v-model= "pwdData.new"
+                                required>
+                            </label>
+                        </div>
+                        <p class="errorTxt" v-if="error.new">Mật khẩu cũ và mới không được giống nhau</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="itemIpt">
+                            <label>
+                                <span>mật khẩu mới</span>
+                                <input type="password"           
+                                placeholder="Nhập mật khẩu mới"
+                                v-model= "pwdData.again"
+                                required>
+                            </label>
+                        </div>
+                        <p class="errorTxt" v-if="error.again">Xác nhận mật khẩu mới tương đồng</p>
+                    </div>
+                </div>
+
+                <div class="btnBox">
+                    <div class="btn_linear_c3 btn">
+                        <button class="btn_cnt">Số di động</button>
+                    </div>
+                    <div class="btn_linear_c2 btn" @click="goMbr()">
+                        <div class="btn_cnt">Hủy bỏ</div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="minDialog" :class="{'on':minDialog}">Sửa đổi thành công</div>
@@ -121,19 +207,34 @@
                     nickname: '',
                     email: '',
                     phone: '',
-                    gender: '',
+                    gender: 'Other',
                     birthday: '',
                     fb: '',
                     tg: '',
                     zalo: '',
                 },
-                minDialog:false
+                pwdData: {
+                    old: '',
+                    new: '',
+                    again: ''
+                },
+                error: {
+                    old: false,
+                    new: false,
+                    again: false,
+                    birthday:false,
+                },
+                oneIpt: false,
+                minDialog: false,
             };
         },
         methods: {
             setH() {
-                let cntH = indexVue.$refs.content.clientHeight;
-                this.$refs.personal.style.minHeight = `${cntH}px`
+                let winH = document.body.clientHeight;
+                let hdH = indexVue.$refs.header.clientHeight;
+                let ftH = indexVue.$refs.ft.clientHeight;
+
+                this.$refs.personal.style.minHeight = `${winH-hdH-ftH}px`
             },
             getMbr() {
                 let tk = JSON.parse(sessionStorage.getItem('session')).token;
@@ -156,6 +257,10 @@
                         self.mbrData.fb = mbr.fb;
                         self.mbrData.tg = mbr.tg;
                         self.mbrData.zalo = mbr.zalo;
+
+                        if (mbr.birthday == "") {
+                            self.setDate();
+                        }
                     }
                 })
             },
@@ -169,7 +274,6 @@
                 mbrMsg.phone = String(self.mbrData.phone);
                 mbrMsg.gender = String(self.mbrData.gender);
                 mbrMsg.birthday = String(self.mbrData.birthday);
-                mbrMsg.birthday = '2021/05/31'; 
                 mbrMsg.fb = String(self.mbrData.fb);
                 mbrMsg.tg = String(self.mbrData.tg);
                 mbrMsg.zalo = String(self.mbrData.zalo);
@@ -180,20 +284,114 @@
                 let data = JSON.stringify(mbrMsg);
                 xhr.send(data);
                 xhr.onload = function() {
-                    if(xhr.status == 200){
+                    if (xhr.status == 200) {
                         self.minDialog = true;
-                        setTimeout(function(){
-                            self.minDialog = false;    
-                        },1500)
-                    }else{
-                        location.href = "#/member";
+                        setTimeout(function() {
+                            self.minDialog = false;
+                            location.href = "#/member";
+                        }, 1500)
+                    } 
+                    else if ( mbrMsg.birthday == ''){
+                        self.error.birthday = true;
+                    }
+                    else {
+                        sessionStorage.removeItem('session');
+                        location.href = "#/home";
+                        location.reload();
                     }
                 }
             },
-            goMbr(){
+            goMbr() {
                 location.href = "#/member";
-            }
+            },
+            setDate() {
+                let self = this;
+                new Rolldate({
+                    el: '#date-group',
+                    format: 'YYYY-MM-DD',
+                    beginYear: 1500,
+                    endYear: 2100,
+                    lang: {
+                        title: 'Chọn ngày tháng',
+                        cancel: 'Hủy',
+                        confirm: 'Gửi đi',
+                        year: '',
+                        month: '',
+                        day: ''
+                    },
+                    init: function() {
+                        // 插件开始触发
+                    },
+                    moveEnd: function(scroll) {
+                        // 選擇區間到末端滚动结束
+                    },
+                    confirm: function(data) {
+                        // 确定按钮触发
+                        self.mbrData.birthday = data
+                    },
+                    cancel: function() {
+                        // 插件运行取消
+                    }
+                })
+            },
+            reset() {
+                this.getMbr();
+                let data = [this.pwdData, this.error];
+                data.forEach(function(item) {
+                    for (let i in item) {
+                        if (item[i] == true) {
+                            item[i] = false
+                        } else if (item[i] != '') {
+                            item[i] = ''
+                        }
+                    }
+                })
+            },
+            // 修改密碼
+            ckPwd() {
+                for (let i in this.error) {
+                    this.error[i] = false;
+                }
 
+                if (this.pwdData.old == this.pwdData.new) {
+                    this.error.new = true
+                } else if (this.pwdData.new != this.pwdData.again) {
+                    this.error.again = true
+                } else {
+                    this.pushPwd()
+                }
+            },
+            pushPwd() {
+                let account = {};
+                let self = this;
+                let token = JSON.parse(sessionStorage.getItem('session')).token;
+                account.token = String(token);
+                account.oldpassword = String(this.pwdData.old);
+                account.newpassword = String(this.pwdData.again);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("PUT", "https://www.vnc8888.com/api/member/password");
+                xhr.setRequestHeader("Content-type", "application/json");
+                let data = JSON.stringify(account);
+                xhr.send(data);
+                xhr.onload = function() {
+                    switch (xhr.status) {
+                        case 200:
+                        case 404:
+                            sessionStorage.removeItem('session');
+                            setTimeout(function() {
+                                self.goMbr();
+                                location.reload();
+                            }, 100)
+                            break;
+                        case 403:
+                            for (let i in this.error) {
+                                this.error[i] = false;
+                            }
+                            self.error.old = true;
+                    }
+                }
+            }
         },
         mounted() {
             this.setH();

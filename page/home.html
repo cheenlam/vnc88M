@@ -164,7 +164,27 @@
                 </template>
             </ul>
         </div>
+
     </div>
+
+    <!-- ===== floatBtn (浮動按鈕 每日遊戲&註冊抽獎)  start ===== -->
+    <div class="floatBtn">
+        <ul>
+            <li @click="opGame()">
+                <div class="btnImg">
+                    <img src="images/icon/god.png">
+                </div>
+                <div class="text">Trò chơi mỗi ngày</div>
+            </li>
+            <li @click="opRan()">
+                <div class="btnImg">
+                    <img src="images/icon/roulette.png">
+                </div>
+                <div class="text">Đăng kí bốc thăm</div>
+            </li>
+        </ul>
+    </div>
+
 
     <!-- ===== 基本會員資料(登錄時顯示) ===== -->
     <div class="onSignin" ref="onSignin" v-show="mbrMsg.onLogin">
@@ -459,7 +479,17 @@
                         this.newSwitch.resource = true;
                         break;
                 }
-            }
+            },
+
+            // 浮動按鈕開關
+            opGame() {
+                indexVue.dialog.main = true;
+                indexVue.dialog.todayGame = true;
+            },
+            opRan() {
+                indexVue.dialog.main = true;
+                indexVue.dialog.gift = true;
+            },
         },
         mounted() {
             this.chCarousel();
@@ -477,6 +507,7 @@
 
             // google分析
             window.dataLayer = window.dataLayer || [];
+
             function gtag() {
                 dataLayer.push(arguments);
             }

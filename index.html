@@ -14,11 +14,12 @@
     <script src="js/marquee.js"></script>
     <script src="js/router.js"></script>
     <script src="js/verifyCode.js"></script>
+    <script src="js/rolldate.js"></script>
     <!-- 自訂義css & js -->
-    <script src="js/pageData.js?v1.0.3"></script>
+    <script src="js/pageData.js?v1.0.4"></script>
     <link rel="stylesheet" href="css/all.css?v1.0.1">
 
-     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-207427072-1">
     </script>
 
@@ -317,6 +318,56 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ===== 今日遊戲 ===== -->
+            <div class="todayGame" :class="{'on':dialog.todayGame}">
+                <div class="todayGame_cnt">
+                    <div class="close" @click="nextDialog()"></div>
+                    <div class="firework">
+                        <img src="images/todayGame/firework.png">
+                    </div>
+                    <div class="todayGame_msg">
+                        <p>VNC88 </p>
+                        <p>tặng bạn</p>
+                        <p>3000</p>
+                        <p>đồng tiền vàng</p>
+                    </div>
+                    <div class="btn">
+                        <img src="images/todayGame/todayGame_btn.png">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新註冊獎金 -->
+            <div class="newGift" v-show="dialog.gift">
+                <div class="roulette">
+                    <div class="rou_body" id="rou_body"></div>
+                    <div class="rou_pointer" style="padding: 0%;">
+                        <img src="images/roulette/rou_pointer.png">
+                    </div>
+                </div>
+
+                <div class="newGift_cnt" id="newGift_cnt">
+                    <div class="title">
+                        <span>Phần thưởng cho người mới đăng kí</span>
+                        <p>Nhập mã SDT của bạn vào bên dưới và thử vận ​​may với vòng quay tài lộc</p>
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="Điền số SDT tài khoản">
+                        <div class="btn_linear_c1 btn">
+                            <button class="btn_cnt">Bắt đầu bốc thăm</button>
+                        </div>
+                    </div>
+
+                    <div class="rule">
+                        <span>Nguyên tắc</span>
+                        <p>- Điền số SDT tài khoản</p>
+                        <p>- Một nhóm tài khoản được giới hạn 1 vòng quay</p>
+                    </div>
+                </div>
+                <div class="close" @click="closeDialog()"></div>
+            </div>
         </div>
     </div>
 
@@ -601,8 +652,30 @@
                 refForget(data) {
                     this.forgetMbr.txt = this.forgetMbr.list[data];
                 },
+                // ==== 起始登入彈窗 ====
+                startDialog() {
+                    let state = sessionStorage.getItem('onStart')
+
+                    if (String(state) == 'null') {
+                        this.dialog.main = true;
+                        this.dialog.todayGame = true;
+                    }
+                },
+                // ==== 起始下一個彈窗 ====
+                nextDialog() {
+                    let state = sessionStorage.getItem('onStart')
+
+                    if (String(state) == 'null') {
+                        this.dialog.todayGame = false;
+                        this.dialog.gift = true;
+                        sessionStorage.setItem('onStart', true)
+                    }else{
+                        this.closeDialog();
+                    }
+                }
             },
             mounted() {
+                this.startDialog();
                 this.verify("mainVerify");
                 this.verify("regdVerify");
                 this.verify("forgetVerify");
