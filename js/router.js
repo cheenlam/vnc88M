@@ -49,6 +49,9 @@ window.Router.init();
 Router.route('/home', function() {
     mainInclude('page/home.html');
     $('#ftMenu li').removeClass('on')
+
+
+    mainInclude('page/match.html');
 });
 Router.route('/match', function() {
     mainInclude('page/match.html');

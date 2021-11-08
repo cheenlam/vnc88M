@@ -899,6 +899,7 @@ img {
 .header .top .hd_logo {
   width: 220px;
   margin: 0 20px;
+  margin: 0 auto;
 }
 
 .header .top .menuBer {

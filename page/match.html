@@ -17,9 +17,15 @@
         },
         methods: {
             setH() {
-                let cntH = indexVue.$refs.content.clientHeight;
-                this.$refs.matchBox.style.height = `${cntH}px`;
-                this.$refs.iframe.height = cntH + 40;
+                // let cntH = indexVue.$refs.content.clientHeight;
+                // this.$refs.matchBox.style.height = `${cntH}px`;
+                // this.$refs.iframe.height = cntH + 40;
+
+
+                let winH = document.body.clientHeight;
+                let hdH = indexVue.$refs.header.clientHeight;
+                this.$refs.matchBox.style.minHeight = `${winH-hdH}px`
+                this.$refs.iframe.height = winH-hdH +40;
             }
         },
         mounted() {

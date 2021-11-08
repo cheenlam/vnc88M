@@ -30,7 +30,7 @@
         <!-- ===== header start ===== -->
         <div class="header" id="header" ref="header">
             <div class="top">
-                <div class="homeBtn">
+                <div class="homeBtn" v-if='false'>
                     <a href="#/home">
                         <img src="images/icon/home.png">
                     </a>
@@ -38,7 +38,7 @@
                 <div class="hd_logo">
                     <img src="images/logo/hd_logo.png">
                 </div>
-                <div class="menuBer" @click="toggleSide()">
+                <div class="menuBer" @click="toggleSide()" v-if='false'>
                     <img src="images/icon/memuBar_open.png" v-if="!sideList">
                     <img src="images/icon/memuBar_close.png" v-if="sideList">
                 </div>
@@ -50,7 +50,7 @@
         </div>
 
         <!-- ===== ftMenu start ===== -->
-        <div class="ftMenu" id="ftMenu" ref="ft">
+        <div class="ftMenu" id="ftMenu" ref="ft" v-if="false">
             <ul>
                 <template v-for="(item,index) in ftMenu">
                     <li v-if="item.switch" :data-name="item.data">
