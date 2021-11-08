@@ -9,6 +9,11 @@
     <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/vue_3.2.19.js"></script>
+    <!-- 不快取 -->
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+
     <!-- 外掛插件 -->
     <script src="js/swipeslider.js"></script>
     <script src="js/marquee.js"></script>
@@ -669,7 +674,7 @@
                         this.dialog.todayGame = false;
                         this.dialog.gift = true;
                         sessionStorage.setItem('onStart', true)
-                    }else{
+                    } else {
                         this.closeDialog();
                     }
                 }
